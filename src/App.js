@@ -1,10 +1,8 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import Routes from './routes';
 
 function App() {
-  return (
-    <Button variant="text">Text</Button>
-    );
+  return <Routes />;
 }
 
 export default App;
