@@ -3,10 +3,11 @@ import { Outlet } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
 import ResponsiveAppBar from '~/layouts/MainLayout/Appbar';
+import Sidebar from './Drawer';
 //
 
-const APP_BAR_MOBILE = 64;
-const APP_BAR_DESKTOP = 64;
+const APP_BAR_MOBILE = 56;
+const APP_BAR_DESKTOP = 68;
 
 const RootStyle = styled('div')({
   display: 'flex',
@@ -21,7 +22,7 @@ const MainStyle = styled('div')(({ theme }) => ({
   paddingTop: APP_BAR_MOBILE + 8,
   paddingLeft: theme.spacing(1),
   paddingRight: theme.spacing(1),
-  [theme.breakpoints.up('lg')]: {
+  [theme.breakpoints.up('sm')]: {
     paddingTop: APP_BAR_DESKTOP + 8,
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
@@ -29,9 +30,12 @@ const MainStyle = styled('div')(({ theme }) => ({
 }));
 
 export default function DashboardLayout() {
+  const [open, setOpen] = useState(false);
+
   return (
     <RootStyle>
-      <ResponsiveAppBar />
+      <ResponsiveAppBar onOpenSidebar={() => setOpen(true)} />
+      <Sidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
       <MainStyle>
         <Outlet />
       </MainStyle>

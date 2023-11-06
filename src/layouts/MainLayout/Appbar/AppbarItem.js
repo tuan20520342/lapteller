@@ -6,9 +6,9 @@ const AppBarItem = ({ item, active }) => {
   const theme = useTheme();
   const { title, path } = item;
   const activeStyle = {
-    color: 'secondary.main',
+    color: 'primary.darkbrown',
     fontWeight: 'fontWeightMedium',
-    bgcolor: alpha(theme.palette.secondary.main, theme.palette.action.selectedOpacity),
+    bgcolor: alpha(theme.palette.primary.dark, theme.palette.action.selectedOpacity),
   };
 
   return (
