@@ -4,11 +4,14 @@ import NavSection from './NavSection';
 import navConfig from '../NavConfig';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import useResponsive from '~/hooks/useResponsive';
 
 const DRAWER_WIDTH = 280;
 
 export default function Sidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
+
+  const isTablet = useResponsive('up', 'md');
 
   useEffect(() => {
     if (isOpenSidebar) {
@@ -18,14 +21,16 @@ export default function Sidebar({ isOpenSidebar, onCloseSidebar }) {
   }, [pathname]);
 
   return (
-    <Drawer
-      open={isOpenSidebar}
-      onClose={onCloseSidebar}
-      PaperProps={{
-        sx: { width: DRAWER_WIDTH },
-      }}
-    >
-      <NavSection navConfig={navConfig} />
-    </Drawer>
+    !isTablet && (
+      <Drawer
+        open={isOpenSidebar}
+        onClose={onCloseSidebar}
+        PaperProps={{
+          sx: { width: DRAWER_WIDTH },
+        }}
+      >
+        <NavSection navConfig={navConfig} />
+      </Drawer>
+    )
   );
 }
