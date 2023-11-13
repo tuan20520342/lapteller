@@ -10,7 +10,7 @@ const ChatBotPage = () => {
     const headers = {
       'Content-Type': 'application/json; charset=utf-8',
       Authorization:
-        'Bearer ya29.a0AfB_byDIOvDZ6PGb2MFpJvsWOyYL4OU-HdWCa4pG8SAPqOUFIMtK9b4qAz2YDXH6NBruKuj9iGWVYtSsZKlkjnviKnNBbllDAzfFk7Ep-9kU2BYfQMRdCcPD2Y1lDzwPgU2lEktpUX9l53igYbaPce0h_jp1nO8fPWnEyoWCOgjFeANR_J5MrPWgPURMZcj3Pc_rJSh7aI2GJIs-DcgEoSNJ2-_of8PU9h-wPQzXjj4QXaV8Sf99GoGbw_mudnvnfZj4uWmrt_IM4UEtELRXmxv5hOgxz0OAFO6Aa3jKppKoqSpmxHqmJE7Iis4DO0xD8TtB36Ed4V5KaAqUo4ufn5e_Nev_48pRcSjPWjR0g-CJ7vk0t_Ca1dGyv__To9KFNFR4gnvZWCfOX1VOVVhIyLD_NVRJpWE_M7mi397faCgYKAdYSARMSFQHGX2Mi7wXptwBtzCLsrMjCGy8nwA0431',
+        'Bearer ya29.a0AfB_byB-buP_CEq6uv3G8afQ87gHdOcoZ7yHMhna03GNvGuxdBBslNPSh7y_1d_MG9SPSJERIvFd2CBuBViIQUXxNUeV9G8Ax2uph9bnuZ1JVPNZ0-tk3LcThp76So9jsl2C3nSVBqpQV_Uo5Usl4y6yD8Yyrj6l_vuoCUXU12i_TYpaA_pBw-9yWSFp22B1IykMrSgZUdzSjVduZM7MeZI4lCOdLE81ICiQDe8rjJF4x58Y7-XM7dSDGlGjHUrN9YPB34r7DTCA0_FjdKDcymgGqBeShIc4h15Wo-5VHBJPEKkefvvRKmD8Q0E-IzmqjI_q5BmMLlukH5Pp6s_uEag5_CvYvLIVoaez3eO8hV4o8UMVvPfoknyV2ym1WWyrtCUkdRXG_I_gUozUUFzaWqcWDYlmPnOf3oCRKp8aCgYKAYoSARMSFQHGX2Mi1eQt6ul1f3_AyARsrZv7xQ0430',
     };
 
     const requestData = {
@@ -31,7 +31,7 @@ const ChatBotPage = () => {
       .then((response) => {
         setResponseData(response.data.queryResult.fulfillmentText); // Change the path to get the value
       })
-      .catch((error) => {
+      .catch((error) =>   {
         console.error('Response not found. Error:', error);
       });
   }, []);
