@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { TextField, Button, Paper, Typography, Avatar } from '@mui/material';
-import { Calculate } from '@mui/icons-material';
-import { deepOrange, deepPurple } from '@mui/material/colors';
+import { Avatar, Paper, Typography } from '@mui/material';
+import { deepOrange } from '@mui/material/colors';
 
 const Chat = ({ isAnswer, content }) => {
   return (
@@ -16,10 +15,12 @@ const Chat = ({ isAnswer, content }) => {
         justifyContent: isAnswer ? 'flex-start' : 'flex-end',
       }}
     >
-      {isAnswer && <Avatar sx={{ bgcolor: deepOrange[500] }}>B</Avatar>}
+      {isAnswer && <Avatar sx={{ bgcolor: deepOrange[500], display: { xs: 'none', md: 'flex' } }}>B</Avatar>}
       <Paper
         sx={{
-          width: { xs: '90%', md: '80%' },
+          width: 'content-fit',
+          marginLeft: !isAnswer && '10%',
+          marginRight: isAnswer && '10%',
           bgcolor: isAnswer ? 'primary.lighter' : 'secondary.lighter',
           p: 1,
         }}
