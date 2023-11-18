@@ -29,6 +29,10 @@ const MainStyle = styled('div')(({ theme }) => ({
   },
 }));
 
+const FullHeightDiv = styled('div')({
+  height: '100%', // Set the height to 100%
+});
+
 export default function DashboardLayout() {
   const [open, setOpen] = useState(false);
 
@@ -37,7 +41,9 @@ export default function DashboardLayout() {
       <ResponsiveAppBar onOpenSidebar={() => setOpen(true)} />
       <Sidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
       <MainStyle>
-        <Outlet />
+        <FullHeightDiv>
+          <Outlet />
+        </FullHeightDiv>
       </MainStyle>
     </RootStyle>
   );

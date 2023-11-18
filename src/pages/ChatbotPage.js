@@ -37,32 +37,48 @@ const ChatBotPage = () => {
   return (
     <div
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        gap: 10,
-        marginBottom: 100,
+        height: '100%',
+        width: '100%',
       }}
     >
-      {listChat.map((item, index) => (
-        <Chat key={index} content={item.content} isAnswer={item.isAnswer}></Chat>
-      ))}
+      <Paper
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          flexDirection: 'column',
+          gap: '10px',
+          height: '100%',
+          width: '100%',
+          maxWidth: '1020px',
+          minWidth: '200px',
+          marginBottom: '100px',
+          backgroundColor: 'white',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          padding: '10px',
+        }}
+      >
+        {listChat.map((item, index) => (
+          <Chat key={index} content={item.content} isAnswer={item.isAnswer}></Chat>
+        ))}
+      </Paper>
 
       <Paper
+        elevation={4}
         sx={{
           width: '100%',
           display: 'flex',
           gap: 1,
           position: 'fixed',
           bottom: 0,
+          left: 0,
           padding: 2,
           justifyContent: 'center',
         }}
       >
-        <Box sx={{ width: '90%', maxWidth: 1000, minWidth: 400, position: 'relative' }}>
+        <Box sx={{ width: '90%', maxWidth: 1000, minWidth: 200, position: 'relative' }}>
           <TextField
-            inputProps={{ style: { fontWeight: 500 } }}
+            inputProps={{ style: { fontWeight: 500 }, autocomplete: 'off' }}
             variant="outlined"
             placeholder="Send a message"
             fullWidth
