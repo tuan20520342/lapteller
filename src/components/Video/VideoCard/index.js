@@ -1,54 +1,68 @@
 import React, { useState } from 'react';
-import { Avatar, Button, Card, CardActions, CardContent, CardMedia, Paper, Typography } from '@mui/material';
-import { deepOrange } from '@mui/material/colors';
+import { Button, Card, CardContent, CardMedia, Typography, Tooltip, ButtonBase, CardActionArea } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-const VideoCard = () => {
+const VideoCard = ({ id, title, channel, thumbnail, publishTime }) => {
+  const navigate = useNavigate();
+
+  const DateTime = (publishTime) => {
+    const day = new Date(publishTime);
+    return `${day.getDay()}/${day.getMonth()}/${day.getFullYear()}`;
+  };
+
+  const handleVideoDetail = () => {
+    navigate(`/videos/${id}`);
+  };
+
   return (
-    <Card sx={{ width: '100%' }}>
-      <CardMedia
-        sx={{
-          height: 0,
-          paddingTop: '56.25%',
-        }}
-        image="https://i.ytimg.com/vi/EIn7j2DoOPk/mqdefault.jpg"
-        title="green iguana"
-      />
-      <CardContent>
-        <Typography
-          gutterBottom
-          variant="h6"
+    <Card>
+      <CardActionArea onClick={handleVideoDetail}>
+        <CardMedia
           sx={{
-            fontWeight: 600,
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            display: '-webkit-box',
-            WebkitLineClamp: '2',
-            WebkitBoxOrient: 'vertical',
-            lineHeight: 1.5,
+            aspectRatio: '16/9',
           }}
-        >
-          Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents
-        </Typography>
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={{
-            fontWeight: 500,
-          }}
-          noWrap
-        >
-          LAPTELLER
-        </Typography>
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={{
-            fontWeight: 500,
-          }}
-        >
-          22/11/2022
-        </Typography>
-      </CardContent>
+          image={thumbnail}
+          title=""
+        />
+        <CardContent>
+          <Tooltip title={title}>
+            <Typography
+              gutterBottom
+              variant="h6"
+              sx={{
+                fontWeight: 600,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                display: '-webkit-box',
+                WebkitLineClamp: '2',
+                WebkitBoxOrient: 'vertical',
+                lineHeight: 1.5,
+              }}
+            >
+              {title}
+            </Typography>
+          </Tooltip>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{
+              fontWeight: 500,
+            }}
+            noWrap
+          >
+            {channel}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{
+              fontWeight: 500,
+            }}
+          >
+            {DateTime(publishTime)}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
     </Card>
   );
 };

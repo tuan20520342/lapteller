@@ -1,9 +1,41 @@
 import { Box, IconButton, InputAdornment, Paper, TextField } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import VideoCard from '~/components/Video/VideoCard';
 import SearchIcon from '@mui/icons-material/Search';
+import { useDispatch, useSelector } from 'react-redux';
+import * as SagaActionTypes from '~/redux/constants';
 
 const VideoPage = () => {
+  const dispatch = useDispatch();
+  const { listVideo } = useSelector((state) => state.videoSlice);
+
+  const [keyword, setKeyWord] = useState('');
+
+  useEffect(() => {
+    dispatch({
+      type: SagaActionTypes.GET_VIDEO_SAGA,
+    });
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [listVideo]);
+
+  const handleSearchVideo = () => {
+    if (keyword.trim() !== '') {
+      dispatch({
+        type: SagaActionTypes.GET_VIDEO_SAGA,
+        keyword: keyword.replace(/\s/g, '+'),
+      });
+    }
+  };
+
+  const handleEnterSearch = (key) => {
+    if (key.key === 'Enter') {
+      handleSearchVideo();
+    }
+  };
+
   return (
     <div
       style={{
@@ -21,7 +53,9 @@ const VideoPage = () => {
           left: 0,
           top: { xs: 55, sm: 63, md: 67 },
           justifyContent: 'center',
+          zIndex: 1000,
         }}
+        elevation={2}
       >
         <Box sx={{ width: '90%', maxWidth: 1000, minWidth: 200, position: 'relative' }}>
           <TextField
@@ -30,10 +64,14 @@ const VideoPage = () => {
             placeholder="Search"
             fullWidth
             color="secondary"
+            onChange={(e) => setKeyWord(e.target.value)}
+            onKeyDown={(key) => {
+              handleEnterSearch(key);
+            }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton aria-label="send button" edge="end">
+                  <IconButton aria-label="send button" edge="end" onClick={handleSearchVideo}>
                     <SearchIcon />
                   </IconButton>
                 </InputAdornment>
@@ -55,21 +93,16 @@ const VideoPage = () => {
           marginTop: 100,
         }}
       >
-        <VideoCard />
-        <VideoCard />
-        <VideoCard />
-        <VideoCard />
-        <VideoCard />
-        <VideoCard />
-        <VideoCard />
-        <VideoCard />
-        <VideoCard />
-        <VideoCard />
-        <VideoCard />
-        <VideoCard />
-        <VideoCard />
-        <VideoCard />
-        <VideoCard />
+        {listVideo.map((item) => (
+          <VideoCard
+            key={item.id.videoId}
+            id={item.id.videoId}
+            title={item.snippet.title}
+            channel={item.snippet.channelTitle}
+            thumbnail={item.snippet.thumbnails.medium.url}
+            publishTime={item.snippet.publishTime}
+          ></VideoCard>
+        ))}
       </div>
     </div>
   );
