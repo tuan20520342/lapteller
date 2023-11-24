@@ -1,21 +1,23 @@
-import { Box, IconButton, InputAdornment, Paper, TextField } from '@mui/material';
+import { Box, Button, IconButton, InputAdornment, Paper, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import VideoCard from '~/components/Video/VideoCard';
 import SearchIcon from '@mui/icons-material/Search';
 import { useDispatch, useSelector } from 'react-redux';
 import * as SagaActionTypes from '~/redux/constants';
+import ModalCustom from '~/HOC/ModalCustom';
+import { modalActions } from '~/redux/reducer/ModalReducer';
+import VideoModal from '~/components/Video/VideoModal';
 
 const VideoPage = () => {
   const dispatch = useDispatch();
   const { listVideo } = useSelector((state) => state.videoSlice);
 
   const [keyword, setKeyWord] = useState('');
-
   useEffect(() => {
     dispatch({
       type: SagaActionTypes.GET_VIDEO_SAGA,
     });
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -30,6 +32,15 @@ const VideoPage = () => {
     }
   };
 
+  const handleOpenVideoModal = (id) => {
+    console.log(id);
+    dispatch(
+      modalActions.showModal({
+        ComponentContent: <VideoModal id={id} />,
+      }),
+    );
+  };
+
   const handleEnterSearch = (key) => {
     if (key.key === 'Enter') {
       handleSearchVideo();
@@ -42,6 +53,8 @@ const VideoPage = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center', // Center the content vertically
+        height: '100%',
+        width: '100%',
       }}
     >
       <Paper
@@ -101,9 +114,12 @@ const VideoPage = () => {
             channel={item.snippet.channelTitle}
             thumbnail={item.snippet.thumbnails.medium.url}
             publishTime={item.snippet.publishTime}
+            onClick={handleOpenVideoModal}
           ></VideoCard>
         ))}
+        {/* <Button onClick={() => handleOpenVideoModal('9zJ86TCf5Ww')}>aaaaaaaaa</Button> */}
       </div>
+      <ModalCustom />
     </div>
   );
 };

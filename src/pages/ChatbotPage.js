@@ -1,8 +1,7 @@
 import { Box, IconButton, InputAdornment, Paper, TextField } from '@mui/material';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Chat from '~/components/Chatbot/Chat';
 import SendIcon from '@mui/icons-material/Send';
-import { Input } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import * as SagaActionTypes from '~/redux/constants';
 
@@ -78,7 +77,7 @@ const ChatBotPage = () => {
       >
         <Box sx={{ width: '90%', maxWidth: 1000, minWidth: 200, position: 'relative' }}>
           <TextField
-            inputProps={{ style: { fontWeight: 500 }, autocomplete: 'off' }}
+            inputProps={{ style: { fontWeight: 500 }, autoComplete: 'off' }}
             variant="outlined"
             placeholder="Send a message"
             fullWidth

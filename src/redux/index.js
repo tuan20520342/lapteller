@@ -3,12 +3,14 @@ import rootSaga from './rootSaga';
 import createSagaMiddleware from 'redux-saga';
 import chatbotSlice from './reducer/ChatbotReducer';
 import videoSlice from './reducer/VideoReducer';
+import modalSlice from './reducer/ModalReducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = {
   chatbotSlice,
   videoSlice,
+  modalSlice,
 };
 
 export const store = configureStore({

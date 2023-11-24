@@ -1,6 +1,7 @@
 import NewsPage from '~/pages/NewsPage';
 import VideoPage from '~/pages/VideoPage';
 import ChatBotPage from '~/pages/ChatbotPage';
+import PageNotFound from '~/pages/PageNotFound';
 
 const CommonRoutes = [
   {
@@ -14,6 +15,10 @@ const CommonRoutes = [
   {
     path: '/chatbot',
     element: <ChatBotPage />,
+  },
+  {
+    path: '*',
+    element: <PageNotFound />,
   },
 ];
 

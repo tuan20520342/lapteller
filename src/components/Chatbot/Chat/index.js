@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Avatar, Paper, Typography } from '@mui/material';
 import { deepOrange } from '@mui/material/colors';
 

@@ -1,22 +1,15 @@
-import React, { useState } from 'react';
-import { Button, Card, CardContent, CardMedia, Typography, Tooltip, ButtonBase, CardActionArea } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Card, CardContent, CardMedia, Typography, Tooltip, CardActionArea } from '@mui/material';
 
-const VideoCard = ({ id, title, channel, thumbnail, publishTime }) => {
-  const navigate = useNavigate();
-
+const VideoCard = ({ id, title, channel, thumbnail, publishTime, onClick }) => {
   const DateTime = (publishTime) => {
     const day = new Date(publishTime);
     return `${day.getDay()}/${day.getMonth()}/${day.getFullYear()}`;
   };
 
-  const handleVideoDetail = () => {
-    navigate(`/videos/${id}`);
-  };
-
   return (
     <Card>
-      <CardActionArea onClick={handleVideoDetail}>
+      <CardActionArea onClick={() => onClick(id)}>
         <CardMedia
           sx={{
             aspectRatio: '16/9',
