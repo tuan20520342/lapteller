@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, CardMedia, Typography, Tooltip, CardActionArea } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, Tooltip, CardActionArea, Box } from '@mui/material';
 
 const VideoCard = ({ id, title, channel, thumbnail, publishTime, onClick }) => {
   const DateTime = (publishTime) => {
@@ -8,8 +8,8 @@ const VideoCard = ({ id, title, channel, thumbnail, publishTime, onClick }) => {
   };
 
   return (
-    <Card>
-      <CardActionArea onClick={() => onClick(id)}>
+    <Box sx={{ bgcolor: 'transparent' }}>
+      <CardActionArea sx={{ borderRadius: 1, overflow: 'hidden' }} onClick={() => onClick(id)}>
         <CardMedia
           sx={{
             aspectRatio: '16/9',
@@ -56,7 +56,7 @@ const VideoCard = ({ id, title, channel, thumbnail, publishTime, onClick }) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-    </Card>
+    </Box>
   );
 };
 
