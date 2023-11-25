@@ -3,3 +3,6 @@ export const SEND_MESSAGE_SAGA = 'SEND_MESSAGE_SAGA';
 
 //VIDEO
 export const GET_VIDEO_SAGA = 'GET_VIDEO_SAGA';
+
+//NEWS
+export const GET_NEWS_SAGA = 'GET_NEWS_SAGA';

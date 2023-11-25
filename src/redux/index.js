@@ -4,6 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 import chatbotSlice from './reducer/ChatbotReducer';
 import videoSlice from './reducer/VideoReducer';
 import modalSlice from './reducer/ModalReducer';
+import newsSlice from './reducer/NewsReducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -11,6 +12,7 @@ const rootReducer = {
   chatbotSlice,
   videoSlice,
   modalSlice,
+  newsSlice,
 };
 
 export const store = configureStore({

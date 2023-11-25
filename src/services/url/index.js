@@ -5,4 +5,8 @@ export const URL_CHATBOT = `${DOMAIN_NAME}/dialogflow`;
 
 //VIDEO
 export const URL_GET_VIDEO = (keyword) =>
-  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&order=date&q=${keyword}&regionCode=us&type=video&key=AIzaSyCiNgSYU0moB0Av1XUehPmJnxIaPeVv4eQ&fbclid=IwAR1ZGW3RMECseUC3yoUAfLobc-XxNfLgxUw1zaAyT0FAd-O5cv7WBVhBztc`;
+  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&order=date&q=${keyword}&regionCode=us&type=video&key=AIzaSyByfLzghfCX_9hVzv0WCvb7MRqZ0-k_12M&fbclid=IwAR1ZGW3RMECseUC3yoUAfLobc-XxNfLgxUw1zaAyT0FAd-O5cv7WBVhBztc`;
+
+//NEWS
+export const URL_GET_NEWS = (keyword) =>
+  `https://newsapi.org/v2/everything?q=${keyword}&apiKey=4a302fe946174a09b315117c2449b1f4`;

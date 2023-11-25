@@ -11,7 +11,7 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: '70%',
-  bgcolor: 'transparent',
+  bgcolor: 'black',
   boxShadow: 2,
   borderRadius: 1,
   overflow: 'hidden',
@@ -31,6 +31,7 @@ const ModalCustom = () => {
       onClose={handleCancel}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
+      slotProps={{ backdrop: { sx: { backdropFilter: 'blur(4px)' } } }}
     >
       <Box sx={style}>{ComponentContent}</Box>
     </Modal>
