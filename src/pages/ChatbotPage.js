@@ -55,6 +55,11 @@ const ChatBotPage = () => {
           marginLeft: 'auto',
           marginRight: 'auto',
           padding: '10px',
+          backgroundImage:
+            'linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url(https://i.imgur.com/2JK3Ex8.png)',
+          backgroundSize: '40%',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
         }}
       >
         {listChat.map((item, index) => (
