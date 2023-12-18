@@ -2,6 +2,12 @@ import React from 'react';
 import { Card, CardContent, CardMedia, Typography, Tooltip, CardActionArea, Box } from '@mui/material';
 
 const VideoCard = ({ id, title, channel, thumbnail, publishTime, onClick }) => {
+  function decodeHTMLEntities(text) {
+    var textArea = document.createElement('textarea');
+    textArea.innerHTML = text;
+    return textArea.value;
+  }
+
   const DateTime = (publishTime) => {
     const day = new Date(publishTime);
     return `${day.getDay()}/${day.getMonth()}/${day.getFullYear()}`;
@@ -18,7 +24,7 @@ const VideoCard = ({ id, title, channel, thumbnail, publishTime, onClick }) => {
           title=""
         />
         <CardContent>
-          <Tooltip title={title}>
+          <Tooltip title={decodeHTMLEntities(title)}>
             <Typography
               gutterBottom
               variant="h6"
@@ -32,7 +38,7 @@ const VideoCard = ({ id, title, channel, thumbnail, publishTime, onClick }) => {
                 lineHeight: 1.5,
               }}
             >
-              {title}
+              {decodeHTMLEntities(title)}
             </Typography>
           </Tooltip>
           <Typography

@@ -1,37 +1,16 @@
 import React from 'react';
 import { Card, CardContent, CardMedia, Typography, Tooltip, CardActionArea, Paper } from '@mui/material';
 
-const ProductCard = ({ id, title, price, image }) => {
+const ProductCard = ({ name, screenSize, processor, memory, storage }) => {
   return (
-    <Paper sx={{ bgcolor: 'transparent' }} elevation={2}>
+    <Paper sx={{ bgcolor: 'transparent', width: '272px' }} elevation={2}>
       <CardActionArea sx={{ borderRadius: 1, overflow: 'hidden', background: 'white' }}>
-        <CardMedia
-          sx={{
-            aspectRatio: '1/1',
-          }}
-          image={image}
-          title=""
-        />
         <CardContent>
-          <Typography
-            gutterBottom
-            variant="body1"
-            color="secondary.main"
-            sx={{
-              fontWeight: 600,
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              display: '-webkit-box',
-              WebkitLineClamp: '1',
-              WebkitBoxOrient: 'vertical',
-              lineHeight: 1,
-            }}
-          >
-            {price}
-          </Typography>
-          <Tooltip title={title}>
+          <Tooltip title={name}>
             <Typography
-              variant="h6"
+              gutterBottom
+              variant="body1"
+              color="secondary.main"
               sx={{
                 fontWeight: 600,
                 overflow: 'hidden',
@@ -39,13 +18,57 @@ const ProductCard = ({ id, title, price, image }) => {
                 display: '-webkit-box',
                 WebkitLineClamp: '1',
                 WebkitBoxOrient: 'vertical',
-                lineHeight: 1,
               }}
-              noWrap
             >
-              {title}
+              {name}
             </Typography>
           </Tooltip>
+          <Typography
+            sx={{
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              display: '-webkit-box',
+              WebkitLineClamp: '1',
+              WebkitBoxOrient: 'vertical',
+            }}
+          >
+            {`Screen size: ${screenSize}`}
+          </Typography>
+          <Tooltip title={processor}>
+            <Typography
+              sx={{
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                display: '-webkit-box',
+                WebkitLineClamp: '1',
+                WebkitBoxOrient: 'vertical',
+              }}
+            >
+              {`Processor: ${processor}`}
+            </Typography>
+          </Tooltip>
+          <Typography
+            sx={{
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              display: '-webkit-box',
+              WebkitLineClamp: '1',
+              WebkitBoxOrient: 'vertical',
+            }}
+          >
+            {`Memory: ${memory}`}
+          </Typography>
+          <Typography
+            sx={{
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              display: '-webkit-box',
+              WebkitLineClamp: '1',
+              WebkitBoxOrient: 'vertical',
+            }}
+          >
+            {`Storage: ${storage}`}
+          </Typography>
         </CardContent>
       </CardActionArea>
     </Paper>
