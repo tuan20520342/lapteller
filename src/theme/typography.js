@@ -20,9 +20,9 @@ const FONT_PRIMARY = 'Arial, Helvetica, sans-serif';
 
 const typography = {
   fontFamily: FONT_PRIMARY,
-  fontWeightRegular: 700,
-  fontWeightMedium: 800,
-  fontWeightBold: 900,
+  fontWeightRegular: 400,
+  fontWeightMedium: 600,
+  fontWeightBold: 700,
   h1: {
     fontWeight: 800,
     lineHeight: 80 / 64,

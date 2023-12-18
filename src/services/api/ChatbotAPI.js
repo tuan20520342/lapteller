@@ -4,9 +4,7 @@ import * as UrlApi from '../url';
 export const ChatbotService = {
   postMessage: (message) => {
     const data = {
-      languageCode: 'en',
-      queryText: message,
-      sessionId: 'lapteller-project',
+      question: message,
     };
     return axios.post(UrlApi.URL_CHATBOT, data);
   },

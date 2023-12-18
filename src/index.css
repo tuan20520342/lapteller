@@ -32,3 +32,7 @@ code {
     border-radius: 0;
     background-color:rgba(0, 0, 0, 0);
 }
+
+.markdown ol, .markdown ul {
+  margin-left: 20px;
+}

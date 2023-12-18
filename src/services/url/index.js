@@ -1,7 +1,7 @@
 export const DOMAIN_NAME = 'http://localhost:5000';
 
 //CHATBOT
-export const URL_CHATBOT = `${DOMAIN_NAME}/dialogflow`;
+export const URL_CHATBOT = `${DOMAIN_NAME}/ask`;
 
 //VIDEO
 export const URL_GET_VIDEO = (keyword) =>
@@ -9,4 +9,4 @@ export const URL_GET_VIDEO = (keyword) =>
 
 //NEWS
 export const URL_GET_NEWS = (keyword) =>
-  `https://newsapi.org/v2/everything?q=${keyword}&apiKey=4a302fe946174a09b315117c2449b1f4`;
+  `https://newsapi.org/v2/everything?q=${keyword}&sortBy=popularity&pageSize=100&apiKey=4a302fe946174a09b315117c2449b1f4`;

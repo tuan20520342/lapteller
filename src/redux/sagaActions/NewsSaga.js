@@ -5,14 +5,15 @@ import { NewsService } from '~/services/api/NewAPI';
 
 function* actGetNews(action) {
   try {
-    const { keyword } = action;
+    const { keyword, callback } = action;
     const res = yield call(() => NewsService.getNews(keyword ?? 'laptop'));
     const { status, data } = res;
     console.log(res);
     if (status === 200) {
       yield put(newsActions.getNewsSuccess({ listNews: data.articles }));
+      callback();
     } else {
-      //handle fail
+      callback();
     }
   } catch (err) {
     //handle err

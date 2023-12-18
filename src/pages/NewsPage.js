@@ -1,16 +1,19 @@
-import { Box } from '@mui/material';
-import React, { useEffect } from 'react';
+import { Box, CircularProgress } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import NewsCard from '~/components/News/NewsCard';
+import ProductCard from '~/components/Products/ProductCard';
 import * as SagaActionTypes from '~/redux/constants';
 
 const NewsPage = () => {
   const dispatch = useDispatch();
   const { listNews } = useSelector((state) => state.newsSlice);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     dispatch({
       type: SagaActionTypes.GET_NEWS_SAGA,
+      callback: () => setLoading(false),
     });
   }, [dispatch]);
 
@@ -25,6 +28,7 @@ const NewsPage = () => {
         sx={{
           display: 'flex',
           alignItems: 'center',
+          justifyContent: loading ? 'center' : 'start',
           flexDirection: 'column',
           gap: '10px',
           height: '100%',
@@ -36,16 +40,20 @@ const NewsPage = () => {
           padding: '10px',
         }}
       >
-        {listNews.map((item, index) => (
-          <NewsCard
-            key={index}
-            title={item.title}
-            description={item.description}
-            url={item.url}
-            urlToImage={item.urlToImage}
-            publishedAt={item.publishedAt}
-          ></NewsCard>
-        ))}
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          listNews.map((item, index) => (
+            <NewsCard
+              key={index}
+              title={item.title}
+              description={item.description}
+              url={item.url}
+              urlToImage={item.urlToImage}
+              publishedAt={item.publishedAt}
+            ></NewsCard>
+          ))
+        )}
       </Box>
     </div>
   );
