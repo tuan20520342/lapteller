@@ -4,22 +4,14 @@ import { deepOrange } from '@mui/material/colors';
 import MarkdownView from 'react-showdown';
 import ProductCard from '~/components/Products/ProductCard';
 
-const Chat = ({ isAnswer, content }) => {
+const Chat = ({ isAnswer, content, onClick }) => {
   let renderedContent;
-
   try {
     const parsedContent = JSON.parse(content);
-
+    console.log(parsedContent);
     if (Array.isArray(parsedContent.products)) {
       renderedContent = parsedContent.products.map((item, index) => (
-        <ProductCard
-          key={index}
-          name={item.name}
-          screenSize={item.screenSize}
-          processor={item.processor}
-          memory={item.memory}
-          storage={item.storage}
-        ></ProductCard>
+        <ProductCard key={index} product={item} onClick={onClick}></ProductCard>
       ));
     } else {
       renderedContent = (
@@ -27,7 +19,6 @@ const Chat = ({ isAnswer, content }) => {
       );
     }
   } catch (error) {
-    console.log(error);
     renderedContent = <MarkdownView className="markdown" markdown={content} options={{ tables: true, emoji: true }} />;
   }
 

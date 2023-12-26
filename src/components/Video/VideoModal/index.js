@@ -38,7 +38,11 @@ const VideoModal = ({ id }) => {
     };
   }, [opts]);
 
-  return <YouTube style={containerStyle} videoId={id} opts={opts} />;
+  return (
+    <div style={{ backgroundColor: 'black' }}>
+      <YouTube style={containerStyle} videoId={id} opts={opts} />
+    </div>
+  );
 };
 
 export default VideoModal;

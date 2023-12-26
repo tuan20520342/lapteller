@@ -1,10 +1,15 @@
 import React from 'react';
 import { Card, CardContent, CardMedia, Typography, Tooltip, CardActionArea, Paper } from '@mui/material';
+import { ellipsisStyle } from '~/components/UI/EllipsisStyle';
 
-const ProductCard = ({ name, screenSize, processor, memory, storage }) => {
+const ProductCard = ({ product, onClick }) => {
+  const { name, screenSize, processor, memory, storage } = product;
   return (
     <Paper sx={{ bgcolor: 'transparent', width: '272px' }} elevation={2}>
-      <CardActionArea sx={{ borderRadius: 1, overflow: 'hidden', background: 'white' }}>
+      <CardActionArea
+        sx={{ borderRadius: 1, overflow: 'hidden', background: 'white' }}
+        onClick={() => onClick(product)}
+      >
         <CardContent>
           <Tooltip title={name}>
             <Typography
@@ -13,62 +18,18 @@ const ProductCard = ({ name, screenSize, processor, memory, storage }) => {
               color="secondary.main"
               sx={{
                 fontWeight: 600,
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                display: '-webkit-box',
-                WebkitLineClamp: '1',
-                WebkitBoxOrient: 'vertical',
+                ...ellipsisStyle,
               }}
             >
               {name}
             </Typography>
           </Tooltip>
-          <Typography
-            sx={{
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              display: '-webkit-box',
-              WebkitLineClamp: '1',
-              WebkitBoxOrient: 'vertical',
-            }}
-          >
-            {`Screen size: ${screenSize}`}
-          </Typography>
+          <Typography sx={ellipsisStyle}>{`Screen size: ${screenSize}`}</Typography>
           <Tooltip title={processor}>
-            <Typography
-              sx={{
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                display: '-webkit-box',
-                WebkitLineClamp: '1',
-                WebkitBoxOrient: 'vertical',
-              }}
-            >
-              {`Processor: ${processor}`}
-            </Typography>
+            <Typography sx={ellipsisStyle}>{`Processor: ${processor}`}</Typography>
           </Tooltip>
-          <Typography
-            sx={{
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              display: '-webkit-box',
-              WebkitLineClamp: '1',
-              WebkitBoxOrient: 'vertical',
-            }}
-          >
-            {`Memory: ${memory}`}
-          </Typography>
-          <Typography
-            sx={{
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              display: '-webkit-box',
-              WebkitLineClamp: '1',
-              WebkitBoxOrient: 'vertical',
-            }}
-          >
-            {`Storage: ${storage}`}
-          </Typography>
+          <Typography sx={ellipsisStyle}>{`Memory: ${memory}`}</Typography>
+          <Typography sx={ellipsisStyle}>{`Storage: ${storage}`}</Typography>
         </CardContent>
       </CardActionArea>
     </Paper>

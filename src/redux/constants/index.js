@@ -6,3 +6,6 @@ export const GET_VIDEO_SAGA = 'GET_VIDEO_SAGA';
 
 //NEWS
 export const GET_NEWS_SAGA = 'GET_NEWS_SAGA';
+
+//PRODUCTS
+export const GET_PRODUCTS_SAGA = 'GET_PRODUCTS_SAGA';

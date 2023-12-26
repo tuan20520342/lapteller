@@ -3,7 +3,10 @@ import React, { useEffect, useState } from 'react';
 import Chat from '~/components/Chatbot/Chat';
 import SendIcon from '@mui/icons-material/Send';
 import { useDispatch, useSelector } from 'react-redux';
+import { modalActions } from '~/redux/reducer/ModalReducer';
 import * as SagaActionTypes from '~/redux/constants';
+import ModalCustom from '~/HOC/ModalCustom';
+import ProductModel from '~/components/Products/ProductModel';
 
 const ChatBotPage = () => {
   const dispatch = useDispatch();
@@ -31,6 +34,14 @@ const ChatBotPage = () => {
     if (key.key === 'Enter') {
       handleSendMessage();
     }
+  };
+
+  const onClickProduct = (product) => {
+    dispatch(
+      modalActions.showModal({
+        ComponentContent: <ProductModel product={product} />,
+      }),
+    );
   };
 
   return (
@@ -63,7 +74,7 @@ const ChatBotPage = () => {
         }}
       >
         {listChat.map((item, index) => (
-          <Chat key={index} content={item.content} isAnswer={item.isAnswer}></Chat>
+          <Chat key={index} content={item.content} isAnswer={item.isAnswer} onClick={onClickProduct}></Chat>
         ))}
       </Paper>
 
@@ -104,6 +115,7 @@ const ChatBotPage = () => {
           />
         </Box>
       </Paper>
+      <ModalCustom closeButton={true} />
     </div>
   );
 };

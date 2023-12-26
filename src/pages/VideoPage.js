@@ -33,7 +33,6 @@ const VideoPage = () => {
   };
 
   const handleOpenVideoModal = (id) => {
-    console.log(id);
     dispatch(
       modalActions.showModal({
         ComponentContent: <VideoModal id={id} />,
