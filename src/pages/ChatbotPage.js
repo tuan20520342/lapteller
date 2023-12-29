@@ -115,7 +115,7 @@ const ChatBotPage = () => {
           />
         </Box>
       </Paper>
-      <ModalCustom closeButton={true} />
+      <ModalCustom closeButton={true} custom={{ maxWidth: '1500px', minWidth: '200px' }} />
     </div>
   );
 };

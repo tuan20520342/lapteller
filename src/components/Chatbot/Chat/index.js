@@ -1,27 +1,10 @@
 import React from 'react';
-import { Avatar, Paper, Typography } from '@mui/material';
+import { Avatar, Paper, Stack, Typography } from '@mui/material';
 import { deepOrange } from '@mui/material/colors';
 import MarkdownView from 'react-showdown';
 import ProductCard from '~/components/Products/ProductCard';
 
 const Chat = ({ isAnswer, content, onClick }) => {
-  let renderedContent;
-  try {
-    const parsedContent = JSON.parse(content);
-    console.log(parsedContent);
-    if (Array.isArray(parsedContent.products)) {
-      renderedContent = parsedContent.products.map((item, index) => (
-        <ProductCard key={index} product={item} onClick={onClick}></ProductCard>
-      ));
-    } else {
-      renderedContent = (
-        <MarkdownView className="markdown" markdown={content} options={{ tables: true, emoji: true }} />
-      );
-    }
-  } catch (error) {
-    renderedContent = <MarkdownView className="markdown" markdown={content} options={{ tables: true, emoji: true }} />;
-  }
-
   return (
     <Paper
       sx={{
@@ -43,11 +26,22 @@ const Chat = ({ isAnswer, content, onClick }) => {
           bgcolor: isAnswer ? 'primary.lighter' : 'secondary.lighter',
           p: 1.2,
           display: 'flex',
-          flexWrap: 'wrap',
+          flexDirection: 'column',
           gap: 1,
         }}
       >
-        {renderedContent}
+        <MarkdownView
+          className="markdown"
+          markdown={isAnswer ? content.answer : content}
+          options={{ tables: true, emoji: true }}
+        />
+        {content?.products?.length !== 0 && isAnswer && (
+          <Stack spacing={{ xs: 1 }} direction="row" useFlexGap flexWrap="wrap">
+            {content?.products?.map((item, index) => (
+              <ProductCard key={index} product={item} onClick={onClick}></ProductCard>
+            ))}
+          </Stack>
+        )}
       </Paper>
     </Paper>
   );

@@ -5,19 +5,20 @@ import { modalActions } from '../redux/reducer/ModalReducer';
 import { Box, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
-const style = {
-  boxSizing: 'border-box',
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '70%',
-  boxShadow: 2,
-  borderRadius: 1,
-  overflow: 'hidden',
-};
+const ModalCustom = ({ closeButton, custom }) => {
+  const style = {
+    boxSizing: 'border-box',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '70%',
+    boxShadow: 2,
+    borderRadius: 1,
+    overflow: 'hidden',
+    ...custom,
+  };
 
-const ModalCustom = ({ closeButton }) => {
   const { visible, ComponentContent } = useSelector((state) => state.modalSlice);
   const dispatch = useDispatch();
 

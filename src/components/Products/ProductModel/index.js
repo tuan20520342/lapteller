@@ -6,19 +6,42 @@ import { Box, Grid, Tooltip, Typography } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import { ellipsisStyle } from '~/components/UI/EllipsisStyle';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import ProductDetailCard from '../ProductDetailCard';
+import useResponsive from '~/hooks/useResponsive';
+
+const responsive = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1200 },
+    items: 3,
+    partialVisibilityGutter: 40,
+  },
+  tablet: {
+    breakpoint: { max: 1200, min: 600 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 600, min: 0 },
+    items: 1,
+    slidesToSlide: 1, // optional, default to 1.
+  },
+};
 
 const ProductModel = ({ product }) => {
   const { name, screenSize, processor, memory, storage } = product;
 
-  // const dispatch = useDispatch();
-  // const { listProducts } = useSelector((state) => state.productSlice);
+  const dispatch = useDispatch();
+  const { listProducts } = useSelector((state) => state.productSlice);
 
-  // useEffect(() => {
-  //   dispatch({
-  //     type: SagaActionTypes.GET_PRODUCTS_SAGA,
-  //     productName: productName,
-  //   });
-  // }, [dispatch]);
+  const isPhone = useResponsive('down', 'sm');
+
+  useEffect(() => {
+    dispatch({
+      type: SagaActionTypes.GET_PRODUCTS_SAGA,
+      productName: name,
+    });
+  }, [dispatch]);
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#cecece',
@@ -33,14 +56,9 @@ const ProductModel = ({ product }) => {
       style={{
         backgroundColor: '#f9fbfa',
         padding: 16,
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
         height: '70%',
       }}
     >
-      {/* {listProducts.map((item, index) => (
-        <ProductCard key={index} name={item.title}></ProductCard>
-      ))} */}
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -51,6 +69,7 @@ const ProductModel = ({ product }) => {
                 sx={{
                   fontWeight: 600,
                   ...ellipsisStyle,
+                  paddingRight: 2,
                 }}
               >
                 {name}
@@ -66,26 +85,27 @@ const ProductModel = ({ product }) => {
             <Typography sx={ellipsisStyle}>{`Storage: ${storage}`}</Typography>
           </Grid>
           <Grid item xs={12} md={7} sx={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
-            <div style={{ flex: '1' }}>
-              <img
-                src={
-                  'https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg'
-                }
-                alt=""
-                style={{
-                  width: '100%',
-                  aspectRatio: '1/1',
-                  borderRadius: '10px',
-                  objectFit: 'cover',
-                }}
-              />
-            </div>
-            <div style={{ background: 'red', flex: '1' }}></div>
-            <div style={{ background: 'red', flex: '1' }}></div>
-            <div style={{ background: 'red', flex: '1' }}></div>
+            {listProducts.slice(0, isPhone ? 3 : 4).map((item, index) => (
+              <Paper style={{ flex: '1' }} key={index} elevation={2}>
+                <img
+                  src={item.thumbnail}
+                  alt={item.title}
+                  style={{
+                    width: '100%',
+                    aspectRatio: '1/1',
+                    borderRadius: '10px',
+                    objectFit: 'cover',
+                  }}
+                />
+              </Paper>
+            ))}
           </Grid>
           <Grid item xs={12}>
-            <Item>xs=8</Item>
+            <Carousel responsive={responsive} partialVisible={true}>
+              {listProducts.map((item, index) => (
+                <ProductDetailCard product={item}></ProductDetailCard>
+              ))}
+            </Carousel>
           </Grid>
         </Grid>
       </Box>

@@ -17,7 +17,7 @@ function* actSendMessage(action) {
     if (status === 200) {
       const responseMessage = {
         isAnswer: true,
-        content: data.answer,
+        content: data,
       };
       yield put(chatbotActions.responseMessage({ data: responseMessage }));
     } else {
