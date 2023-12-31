@@ -6,6 +6,7 @@ import videoSlice from './reducer/VideoReducer';
 import modalSlice from './reducer/ModalReducer';
 import newsSlice from './reducer/NewsReducer';
 import productSlice from './reducer/ProductReducer';
+import storeSlice from './reducer/StoreReducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -15,6 +16,7 @@ const rootReducer = {
   modalSlice,
   newsSlice,
   productSlice,
+  storeSlice,
 };
 
 export const store = configureStore({

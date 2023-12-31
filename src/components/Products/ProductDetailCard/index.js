@@ -21,7 +21,7 @@ const ProductDetailCard = ({ product }) => {
   const navigate = useNavigate();
 
   const handleGoToShop = () => {
-    navigate('/customers');
+    navigate('/store', { state: { storeName: product?.source } });
   };
 
   return (

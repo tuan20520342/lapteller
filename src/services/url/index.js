@@ -15,3 +15,6 @@ export const URL_GET_NEWS = (keyword) =>
 
 //PRODUCT
 export const URL_GET_PRODUCTS = `${DOMAIN_NAME}/getProductList`;
+
+//SHOP
+export const URL_GET_LOCALSTORES = `${DOMAIN_NAME}/getLocalStoreLocations`;
