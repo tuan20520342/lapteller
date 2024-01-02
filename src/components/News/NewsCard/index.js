@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, CardMedia, Typography, Tooltip, CardActionArea, Box, Skeleton } from '@mui/material';
+import { Card, CardContent, Typography, CardActionArea, Box, Skeleton } from '@mui/material';
 import useResponsive from '~/hooks/useResponsive';
 
 const NewsCard = ({ title, description, url, urlToImage, publishedAt, loading }) => {

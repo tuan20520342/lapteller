@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, InputAdornment, Paper, TextField } from '@mui/material';
+import { Box, IconButton, InputAdornment, Paper, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import VideoCard from '~/components/Video/VideoCard';
 import SearchIcon from '@mui/icons-material/Search';
@@ -8,17 +8,21 @@ import ModalCustom from '~/HOC/ModalCustom';
 import { modalActions } from '~/redux/reducer/ModalReducer';
 import VideoModal from '~/components/Video/VideoModal';
 import { Helmet } from 'react-helmet';
+import NotFoundImg from '~/components/UI/NotFound';
 
 const VideoPage = () => {
   const dispatch = useDispatch();
   const { listVideo } = useSelector((state) => state.videoSlice);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   const [keyword, setKeyWord] = useState('');
   useEffect(() => {
     dispatch({
       type: SagaActionTypes.GET_VIDEO_SAGA,
-      callback: () => setLoading(false),
+      onStart: () => setLoading(true),
+      onFinish: () => setLoading(false),
+      fail: () => setError(true),
     });
   }, [dispatch]);
 
@@ -31,6 +35,9 @@ const VideoPage = () => {
       dispatch({
         type: SagaActionTypes.GET_VIDEO_SAGA,
         keyword: keyword.replace(/\s/g, '+'),
+        onStart: () => setLoading(true),
+        onFinish: () => setLoading(false),
+        fail: () => setError(true),
       });
     }
   };
@@ -98,31 +105,36 @@ const VideoPage = () => {
           />
         </Box>
       </Paper>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          maxWidth: 1700,
-          width: '100%',
-          gridColumnGap: 10,
-          gridRowGap: 20,
-          marginTop: 100,
-        }}
-      >
-        {loading
-          ? Array.from({ length: 16 }).map((_, index) => <VideoCard key={index} loading={true} />)
-          : listVideo.map((item) => (
-              <VideoCard
-                key={item.id.videoId}
-                id={item.id.videoId}
-                title={item.snippet.title}
-                channel={item.snippet.channelTitle}
-                thumbnail={item.snippet.thumbnails.medium.url}
-                publishTime={item.snippet.publishTime}
-                onClick={handleOpenVideoModal}
-              />
-            ))}
-      </div>
+      {error ? (
+        <NotFoundImg isWrong={true} />
+      ) : (
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            maxWidth: 1700,
+            width: '100%',
+            gridColumnGap: 10,
+            gridRowGap: 20,
+            marginTop: 100,
+          }}
+        >
+          {loading
+            ? Array.from({ length: 16 }).map((_, index) => <VideoCard key={index} loading={true} />)
+            : listVideo.map((item) => (
+                <VideoCard
+                  key={item.id.videoId}
+                  id={item.id.videoId}
+                  title={item.snippet.title}
+                  channel={item.snippet.channelTitle}
+                  thumbnail={item.snippet.thumbnails.medium.url}
+                  publishTime={item.snippet.publishTime}
+                  onClick={handleOpenVideoModal}
+                />
+              ))}
+        </div>
+      )}
+
       <ModalCustom />
     </div>
   );

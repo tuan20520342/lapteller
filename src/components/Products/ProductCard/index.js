@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, CardMedia, Typography, Tooltip, CardActionArea, Paper } from '@mui/material';
+import { CardContent, Typography, Tooltip, CardActionArea, Paper } from '@mui/material';
 import { ellipsisStyle } from '~/components/UI/EllipsisStyle';
 
 const ProductCard = ({ product, onClick }) => {
@@ -24,11 +24,13 @@ const ProductCard = ({ product, onClick }) => {
               {name}
             </Typography>
           </Tooltip>
+
           <Typography sx={ellipsisStyle}>{`Screen size: ${screenSize}`}</Typography>
           <Tooltip title={processor}>
             <Typography sx={ellipsisStyle}>{`Processor: ${processor}`}</Typography>
           </Tooltip>
           <Typography sx={ellipsisStyle}>{`Memory: ${memory}`}</Typography>
+
           <Typography sx={ellipsisStyle}>{`Storage: ${storage}`}</Typography>
         </CardContent>
       </CardActionArea>

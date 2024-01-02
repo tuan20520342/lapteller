@@ -1,17 +1,5 @@
 import React from 'react';
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Tooltip,
-  CardActionArea,
-  Paper,
-  Divider,
-  Button,
-  CardActions,
-  Grid,
-} from '@mui/material';
+import { CardContent, Typography, Paper, Divider, Button, CardActions, Grid, Rating } from '@mui/material';
 import { ellipsisStyle } from '~/components/UI/EllipsisStyle';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import { printNumberWithCommas } from '~/utils/printNumerWithCommas';
@@ -40,9 +28,9 @@ const ProductDetailCard = ({ product }) => {
           {`${printNumberWithCommas(product.extracted_price)} VNĐ`}
         </Typography>
         <Divider variant="middle" sx={{ marginBottom: '8px' }} />
+        <Rating name="half-rating-read" defaultValue={product.rating} precision={0.5} readOnly />
         <Typography sx={ellipsisStyle}>{`Store: ${product.source}`}</Typography>
         <Typography sx={ellipsisStyle}>{`Condition: ${product.second_hand_condition}`}</Typography>
-        <Typography sx={ellipsisStyle}>{`Rating: ${product.rating}/5`}</Typography>
         <Typography sx={ellipsisStyle}>{`Review: ${product.reviews}`}</Typography>
         <CardActions>
           <Grid container spacing={1}>

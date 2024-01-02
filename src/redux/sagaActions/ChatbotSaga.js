@@ -4,8 +4,9 @@ import { chatbotActions } from '../reducer/ChatbotReducer';
 import { ChatbotService } from '~/services/api/ChatbotAPI';
 
 function* actSendMessage(action) {
+  const { message, onLoading, onFinish } = action;
+  let responseMessage;
   try {
-    const { message, onLoading, onFinish } = action;
     const newMessage = {
       isAnswer: false,
       content: message,
@@ -16,17 +17,26 @@ function* actSendMessage(action) {
     const { status, data } = res;
     console.log(res);
     if (status === 200) {
-      const responseMessage = {
+      responseMessage = {
         isAnswer: true,
         content: data,
       };
-      onFinish();
-      yield put(chatbotActions.responseMessage({ data: responseMessage }));
     } else {
-      //handle fail
+      responseMessage = {
+        isAnswer: true,
+        content: { answer: 'Oops! Something went wrong' },
+      };
     }
   } catch (err) {
-    //handle err
+    console.log(err);
+    const { response } = err;
+    responseMessage = {
+      isAnswer: true,
+      content: { answer: response.data.error },
+    };
+  } finally {
+    onFinish();
+    yield put(chatbotActions.responseMessage({ data: responseMessage }));
   }
 }
 

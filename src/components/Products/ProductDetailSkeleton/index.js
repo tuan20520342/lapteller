@@ -1,22 +1,5 @@
 import React from 'react';
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Tooltip,
-  CardActionArea,
-  Paper,
-  Divider,
-  Button,
-  CardActions,
-  Grid,
-  Skeleton,
-} from '@mui/material';
-import { ellipsisStyle } from '~/components/UI/EllipsisStyle';
-import FmdGoodIcon from '@mui/icons-material/FmdGood';
-import { printNumberWithCommas } from '~/utils/printNumerWithCommas';
-import { useNavigate } from 'react-router-dom';
+import { CardContent, Paper, Divider, CardActions, Grid, Skeleton } from '@mui/material';
 
 const ProductDetailSkeleton = () => {
   return (

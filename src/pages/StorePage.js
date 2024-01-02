@@ -1,19 +1,20 @@
-import { Button, IconButton, Skeleton, Stack, Typography } from '@mui/material';
+import { IconButton, Skeleton } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { MapContainer, Marker, Popup, TileLayer, Tooltip, useMap, useMapEvents } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer, useMap, useMapEvents } from 'react-leaflet';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import * as SagaActionTypes from '~/redux/constants';
-import StarIcon from '@mui/icons-material/Star';
 import L from 'leaflet';
 import CustomMarker from '~/components/Store/CustomMarker';
 import BoyIcon from '@mui/icons-material/Boy';
 import { Helmet } from 'react-helmet';
+import NotFoundImg from '~/components/UI/NotFound';
 
 const StorePage = () => {
   const dispatch = useDispatch();
   const { state } = useLocation();
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const { listStores } = useSelector((state) => state.storeSlice);
   const position = !loading
     ? [listStores[0].gps_coordinates.latitude, listStores[0].gps_coordinates.longitude]
@@ -25,8 +26,9 @@ const StorePage = () => {
         type: SagaActionTypes.GET_LOCALSTORES_SAGA,
         storeName: state.storeName,
         callback: () => setLoading(false),
+        fail: () => setError(true),
       });
-  }, [dispatch]);
+  }, [dispatch, state]);
 
   var greenIcon = L.icon({
     iconUrl: require('../assets/marker_map.png'),
@@ -75,7 +77,9 @@ const StorePage = () => {
         <title>{`${!state?.storeName ? '404' : `${state?.storeName}`} | Lapteller`}</title>
       </Helmet>
       {!state?.storeName ? (
-        '404'
+        <NotFoundImg />
+      ) : error ? (
+        <NotFoundImg isWrong={true} />
       ) : loading ? (
         <Skeleton variant="rectangular" height={'100%'} width={'100%'} animation="wave" />
       ) : (

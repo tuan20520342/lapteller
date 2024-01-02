@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import ProductCard from '../ProductCard';
 import * as SagaActionTypes from '~/redux/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Grid, Skeleton, Tooltip, Typography } from '@mui/material';
 import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
 import { ellipsisStyle } from '~/components/UI/EllipsisStyle';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import ProductDetailCard from '../ProductDetailCard';
 import useResponsive from '~/hooks/useResponsive';
 import ProductDetailSkeleton from '../ProductDetailSkeleton';
+import NotFoundImg from '~/components/UI/NotFound';
 
 const responsive = {
   desktop: {
@@ -36,6 +35,7 @@ const ProductModel = ({ product }) => {
   const { listProducts } = useSelector((state) => state.productSlice);
 
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   const isPhone = useResponsive('down', 'sm');
 
@@ -44,8 +44,9 @@ const ProductModel = ({ product }) => {
       type: SagaActionTypes.GET_PRODUCTS_SAGA,
       productName: name,
       callback: () => setLoading(false),
+      fail: () => setError(true),
     });
-  }, [dispatch]);
+  }, [dispatch, name]);
 
   return (
     <div
@@ -55,65 +56,71 @@ const ProductModel = ({ product }) => {
         height: '70%',
       }}
     >
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Tooltip title={name}>
-              <Typography
-                gutterBottom
-                variant="h4"
-                sx={{
-                  fontWeight: 600,
-                  ...ellipsisStyle,
-                  paddingRight: 2,
-                }}
-              >
-                {name}
-              </Typography>
-            </Tooltip>
-          </Grid>
-          <Grid item xs={12} md={5}>
-            <Typography sx={ellipsisStyle}>{`Screen size: ${screenSize}`}</Typography>
-            <Tooltip title={processor}>
-              <Typography sx={ellipsisStyle}>{`Processor: ${processor}`}</Typography>
-            </Tooltip>
-            <Typography sx={ellipsisStyle}>{`Memory: ${memory}`}</Typography>
-            <Typography sx={ellipsisStyle}>{`Storage: ${storage}`}</Typography>
-          </Grid>
-          <Grid item xs={12} md={7} sx={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
-            {loading
-              ? Array.from({ length: isPhone ? 3 : 4 }).map((_, index) => (
-                  <Skeleton
-                    key={index}
-                    variant="rectangular"
-                    sx={{ flex: '1', aspectRatio: '1/1', height: '100%', borderRadius: '8px' }}
-                  />
-                ))
-              : listProducts.slice(0, isPhone ? 3 : 4).map((item, index) => (
-                  <Paper style={{ flex: '1', display: 'flex', justifyContent: 'center' }} key={index} elevation={2}>
-                    <img
-                      src={item.thumbnail}
-                      alt={item.title}
-                      style={{
-                        width: '100%',
-                        aspectRatio: '1/1',
-                        borderRadius: '10px',
-                        objectFit: 'cover',
-                        maxWidth: '205px',
-                      }}
-                    />
-                  </Paper>
-                ))}
-          </Grid>
-          <Grid item xs={12}>
-            <Carousel responsive={responsive} partialVisible={true}>
+      {error ? (
+        <NotFoundImg isWrong={true} />
+      ) : (
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Tooltip title={name}>
+                <Typography
+                  gutterBottom
+                  variant="h4"
+                  sx={{
+                    fontWeight: 600,
+                    ...ellipsisStyle,
+                    paddingRight: 2,
+                  }}
+                >
+                  {name}
+                </Typography>
+              </Tooltip>
+            </Grid>
+            <Grid item xs={12} md={5}>
+              <Typography sx={ellipsisStyle}>{`Screen size: ${screenSize}`}</Typography>
+              <Tooltip title={processor}>
+                <Typography sx={ellipsisStyle}>{`Processor: ${processor}`}</Typography>
+              </Tooltip>
+              <Typography sx={ellipsisStyle}>{`Memory: ${memory}`}</Typography>
+              <Typography sx={ellipsisStyle}>{`Storage: ${storage}`}</Typography>
+            </Grid>
+            <Grid item xs={12} md={7} sx={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
               {loading
-                ? Array.from({ length: 5 }).map((_, index) => <ProductDetailSkeleton key={index} />)
-                : listProducts.map((item, index) => <ProductDetailCard key={index} product={item}></ProductDetailCard>)}
-            </Carousel>
+                ? Array.from({ length: isPhone ? 3 : 4 }).map((_, index) => (
+                    <Skeleton
+                      key={index}
+                      variant="rectangular"
+                      sx={{ flex: '1', aspectRatio: '1/1', height: '100%', borderRadius: '8px' }}
+                    />
+                  ))
+                : listProducts.slice(0, isPhone ? 3 : 4).map((item, index) => (
+                    <Paper style={{ flex: '1', display: 'flex', justifyContent: 'center' }} key={index} elevation={2}>
+                      <img
+                        src={item.thumbnail}
+                        alt={item.title}
+                        style={{
+                          width: '100%',
+                          aspectRatio: '1/1',
+                          borderRadius: '10px',
+                          objectFit: 'cover',
+                          maxWidth: '205px',
+                        }}
+                      />
+                    </Paper>
+                  ))}
+            </Grid>
+            <Grid item xs={12}>
+              <Carousel responsive={responsive} partialVisible={true}>
+                {loading
+                  ? Array.from({ length: 5 }).map((_, index) => <ProductDetailSkeleton key={index} />)
+                  : listProducts.map((item, index) => (
+                      <ProductDetailCard key={index} product={item}></ProductDetailCard>
+                    ))}
+              </Carousel>
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
+        </Box>
+      )}
     </div>
   );
 };

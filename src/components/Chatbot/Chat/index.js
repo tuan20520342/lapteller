@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Paper, Stack, Typography } from '@mui/material';
+import { Avatar, Paper, Stack } from '@mui/material';
 import { deepOrange } from '@mui/material/colors';
 import MarkdownView from 'react-showdown';
 import ProductCard from '~/components/Products/ProductCard';
@@ -40,7 +40,7 @@ const Chat = ({ isAnswer, content, onClick, loading }) => {
             options={{ tables: true, emoji: true }}
           />
         )}
-        {content?.products?.length !== 0 && isAnswer && !loading && (
+        {content?.products && content?.products?.length !== 0 && isAnswer && !loading && (
           <Stack spacing={{ xs: 1 }} direction="row" useFlexGap flexWrap="wrap">
             {content?.products?.map((item, index) => (
               <ProductCard key={index} product={item} onClick={onClick}></ProductCard>

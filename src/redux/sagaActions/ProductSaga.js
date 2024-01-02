@@ -4,19 +4,21 @@ import { productActions } from '../reducer/ProductReducer';
 import { ProductService } from '~/services/api/ProductAPI';
 
 function* actGetProducts(action) {
+  const { productName, callback, fail } = action;
   try {
-    const { productName, callback } = action;
     const res = yield call(() => ProductService.getProducts(productName ?? 'Iphone15'));
     const { status, data } = res;
     console.log(res);
     if (status === 200) {
       const slicedData = data.slice(0, 10);
       yield put(productActions.getProductsSuccess({ listProducts: slicedData }));
-      callback();
     } else {
+      fail();
     }
   } catch (err) {
-    //handle err
+    fail();
+  } finally {
+    callback();
   }
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, CardMedia, Typography, Tooltip, CardActionArea, Box, Skeleton } from '@mui/material';
+import { CardContent, CardMedia, Typography, Tooltip, CardActionArea, Box, Skeleton } from '@mui/material';
 
 const VideoCard = ({ id, title, channel, thumbnail, publishTime, onClick, loading }) => {
   function decodeHTMLEntities(text) {

@@ -1,14 +1,14 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import ChatLoader from '~/components/UI/ChatLoader';
+import NotFoundImg from '~/components/UI/NotFound';
 
 const PageNotFound = () => {
   return (
-    <div>
+    <div style={{ width: '100%', height: '100%' }}>
       <Helmet>
         <title>404 | Lapteller</title>
       </Helmet>
-      <ChatLoader />
+      <NotFoundImg />
     </div>
   );
 };

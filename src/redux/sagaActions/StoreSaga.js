@@ -4,18 +4,21 @@ import { storeActions } from '../reducer/StoreReducer';
 import { StoreService } from '~/services/api/StoreAPI';
 
 function* actGetLocalStore(action) {
+  const { storeName, callback, fail } = action;
+
   try {
-    const { storeName, callback } = action;
     const res = yield call(() => StoreService.getLocalStores(storeName));
     const { status, data } = res;
     console.log(res);
     if (status === 200) {
       yield put(storeActions.getStoresSuccess({ listStores: data }));
-      callback();
     } else {
+      fail();
     }
   } catch (err) {
-    //handle err
+    fail();
+  } finally {
+    callback();
   }
 }
 

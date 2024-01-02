@@ -4,19 +4,20 @@ import { newsActions } from '../reducer/NewsReducer';
 import { NewsService } from '~/services/api/NewAPI';
 
 function* actGetNews(action) {
+  const { keyword, callback, fail } = action;
   try {
-    const { keyword, callback } = action;
     const res = yield call(() => NewsService.getNews(keyword ?? 'laptop'));
     const { status, data } = res;
     if (status === 200) {
       const slicedData = data.articles.slice(0, 30);
       yield put(newsActions.getNewsSuccess({ listNews: slicedData }));
-      callback();
     } else {
-      callback();
+      fail();
     }
   } catch (err) {
-    //handle err
+    fail();
+  } finally {
+    callback();
   }
 }
 
