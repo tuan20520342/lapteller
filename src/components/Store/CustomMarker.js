@@ -11,7 +11,7 @@ const CustomMarker = ({ store }) => {
     <Marker position={[latitude, longitude]}>
       {store?.links?.directions && (
         <Popup>
-          <Button variant="text" sx={{ width: '100%' }} component="a" href={store.links.direction} target="_blank">
+          <Button variant="text" sx={{ width: '100%' }} component="a" href={store.links.directions} target="_blank">
             Directions
           </Button>
         </Popup>
