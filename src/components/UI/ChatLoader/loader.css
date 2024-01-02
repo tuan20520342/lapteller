@@ -7,8 +7,9 @@
   }
   
   .dot {
-    height: 20px;
-    width: 20px;
+    height: 10px;
+    width: 10px;
+    margin: 4px 0;
     margin-right: 10px;
     border-radius: 10px;
     background-color: #b3d4fc;
@@ -34,19 +35,16 @@
   @keyframes pulse {
     0% {
       transform: scale(0.8);
-      background-color: #b3d4fc;
-      box-shadow: 0 0 0 0 rgba(178, 212, 252, 0.7);
+      background-color: #ffa16c;
     }
   
     50% {
       transform: scale(1.2);
-      background-color: #6793fb;
-      box-shadow: 0 0 0 10px rgba(178, 212, 252, 0);
+      background-color: #e28048;
     }
   
     100% {
       transform: scale(0.8);
-      background-color: #b3d4fc;
-      box-shadow: 0 0 0 0 rgba(178, 212, 252, 0.7);
+      background-color: #ffa16c;
     }
   }

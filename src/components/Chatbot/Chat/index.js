@@ -3,8 +3,9 @@ import { Avatar, Paper, Stack, Typography } from '@mui/material';
 import { deepOrange } from '@mui/material/colors';
 import MarkdownView from 'react-showdown';
 import ProductCard from '~/components/Products/ProductCard';
+import ChatLoader from '~/components/UI/ChatLoader';
 
-const Chat = ({ isAnswer, content, onClick }) => {
+const Chat = ({ isAnswer, content, onClick, loading }) => {
   return (
     <Paper
       sx={{
@@ -30,12 +31,16 @@ const Chat = ({ isAnswer, content, onClick }) => {
           gap: 1,
         }}
       >
-        <MarkdownView
-          className="markdown"
-          markdown={isAnswer ? content.answer : content}
-          options={{ tables: true, emoji: true }}
-        />
-        {content?.products?.length !== 0 && isAnswer && (
+        {loading ? (
+          <ChatLoader />
+        ) : (
+          <MarkdownView
+            className="markdown"
+            markdown={isAnswer ? content.answer : content}
+            options={{ tables: true, emoji: true }}
+          />
+        )}
+        {content?.products?.length !== 0 && isAnswer && !loading && (
           <Stack spacing={{ xs: 1 }} direction="row" useFlexGap flexWrap="wrap">
             {content?.products?.map((item, index) => (
               <ProductCard key={index} product={item} onClick={onClick}></ProductCard>

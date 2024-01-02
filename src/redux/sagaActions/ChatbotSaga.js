@@ -5,12 +5,13 @@ import { ChatbotService } from '~/services/api/ChatbotAPI';
 
 function* actSendMessage(action) {
   try {
-    const { message } = action;
+    const { message, onLoading, onFinish } = action;
     const newMessage = {
       isAnswer: false,
       content: message,
     };
     yield put(chatbotActions.sendMessage({ data: newMessage }));
+    onLoading();
     const res = yield call(() => ChatbotService.postMessage(message));
     const { status, data } = res;
     console.log(res);
@@ -19,6 +20,7 @@ function* actSendMessage(action) {
         isAnswer: true,
         content: data,
       };
+      onFinish();
       yield put(chatbotActions.responseMessage({ data: responseMessage }));
     } else {
       //handle fail

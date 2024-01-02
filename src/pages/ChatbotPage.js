@@ -12,7 +12,7 @@ import { Helmet } from 'react-helmet';
 const ChatBotPage = () => {
   const dispatch = useDispatch();
   const { listChat } = useSelector((state) => state.chatbotSlice);
-
+  const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState('');
 
   useEffect(() => {
@@ -25,14 +25,15 @@ const ChatBotPage = () => {
       dispatch({
         type: SagaActionTypes.SEND_MESSAGE_SAGA,
         message: newMessage,
+        onLoading: () => setLoading(true),
+        onFinish: () => setLoading(false),
       });
       setNewMessage('');
-      // You can handle sending messages to a server or other logic here
     }
   };
 
   const handleEnterMesage = (key) => {
-    if (key.key === 'Enter') {
+    if (key.key === 'Enter' && !loading) {
       handleSendMessage();
     }
   };
@@ -80,6 +81,7 @@ const ChatBotPage = () => {
         {listChat.map((item, index) => (
           <Chat key={index} content={item.content} isAnswer={item.isAnswer} onClick={onClickProduct}></Chat>
         ))}
+        {loading && <Chat loading={true} isAnswer={true}></Chat>}
       </Paper>
 
       <Paper
@@ -110,7 +112,7 @@ const ChatBotPage = () => {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton aria-label="send button" onClick={handleSendMessage} edge="end">
+                  <IconButton aria-label="send button" disabled={loading} onClick={handleSendMessage} edge="end">
                     <SendIcon />
                   </IconButton>
                 </InputAdornment>
