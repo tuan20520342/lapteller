@@ -8,6 +8,7 @@ import StarIcon from '@mui/icons-material/Star';
 import L from 'leaflet';
 import CustomMarker from '~/components/Store/CustomMarker';
 import BoyIcon from '@mui/icons-material/Boy';
+import { Helmet } from 'react-helmet';
 
 const StorePage = () => {
   const dispatch = useDispatch();
@@ -70,6 +71,9 @@ const StorePage = () => {
         width: '100%',
       }}
     >
+      <Helmet>
+        <title>{`${!state?.storeName ? '404' : `${state?.storeName}`} | Lapteller`}</title>
+      </Helmet>
       {!state?.storeName ? (
         '404'
       ) : loading ? (

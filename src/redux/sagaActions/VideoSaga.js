@@ -5,12 +5,13 @@ import { VideoService } from '~/services/api/VideoAPI';
 
 function* actGetVideo(action) {
   try {
-    const { keyword } = action;
+    const { keyword, callback } = action;
     const res = yield call(() => VideoService.getVideo(keyword ?? 'laptop+review'));
     const { status, data } = res;
     console.log(res);
     if (status === 200) {
       yield put(videoActions.getVideoSuccess({ listVideo: data.items }));
+      callback();
     } else {
       //handle fail
     }

@@ -7,15 +7,18 @@ import * as SagaActionTypes from '~/redux/constants';
 import ModalCustom from '~/HOC/ModalCustom';
 import { modalActions } from '~/redux/reducer/ModalReducer';
 import VideoModal from '~/components/Video/VideoModal';
+import { Helmet } from 'react-helmet';
 
 const VideoPage = () => {
   const dispatch = useDispatch();
   const { listVideo } = useSelector((state) => state.videoSlice);
+  const [loading, setLoading] = useState(true);
 
   const [keyword, setKeyWord] = useState('');
   useEffect(() => {
     dispatch({
       type: SagaActionTypes.GET_VIDEO_SAGA,
+      callback: () => setLoading(false),
     });
   }, [dispatch]);
 
@@ -51,11 +54,14 @@ const VideoPage = () => {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center', // Center the content vertically
+        alignItems: 'center',
         height: '100%',
         width: '100%',
       }}
     >
+      <Helmet>
+        <title>Video | Lapteller</title>
+      </Helmet>
       <Paper
         sx={{
           width: '100%',
@@ -98,25 +104,24 @@ const VideoPage = () => {
           gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
           maxWidth: 1700,
           width: '100%',
-          // marginLeft: 'auto',
-          // marginRight: 'auto',
           gridColumnGap: 10,
           gridRowGap: 20,
           marginTop: 100,
         }}
       >
-        {listVideo.map((item) => (
-          <VideoCard
-            key={item.id.videoId}
-            id={item.id.videoId}
-            title={item.snippet.title}
-            channel={item.snippet.channelTitle}
-            thumbnail={item.snippet.thumbnails.medium.url}
-            publishTime={item.snippet.publishTime}
-            onClick={handleOpenVideoModal}
-          ></VideoCard>
-        ))}
-        {/* <Button onClick={() => handleOpenVideoModal('9zJ86TCf5Ww')}>aaaaaaaaa</Button> */}
+        {loading
+          ? Array.from({ length: 16 }).map((_, index) => <VideoCard key={index} loading={true} />)
+          : listVideo.map((item) => (
+              <VideoCard
+                key={item.id.videoId}
+                id={item.id.videoId}
+                title={item.snippet.title}
+                channel={item.snippet.channelTitle}
+                thumbnail={item.snippet.thumbnails.medium.url}
+                publishTime={item.snippet.publishTime}
+                onClick={handleOpenVideoModal}
+              />
+            ))}
       </div>
       <ModalCustom />
     </div>

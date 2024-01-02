@@ -83,7 +83,11 @@ const ProductModel = ({ product }) => {
           <Grid item xs={12} md={7} sx={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
             {loading
               ? Array.from({ length: isPhone ? 3 : 4 }).map((_, index) => (
-                  <Skeleton key={index} variant="rectangular" sx={{ flex: '1', aspectRatio: '1/1', height: '100%' }} />
+                  <Skeleton
+                    key={index}
+                    variant="rectangular"
+                    sx={{ flex: '1', aspectRatio: '1/1', height: '100%', borderRadius: '8px' }}
+                  />
                 ))
               : listProducts.slice(0, isPhone ? 3 : 4).map((item, index) => (
                   <Paper style={{ flex: '1', display: 'flex', justifyContent: 'center' }} key={index} elevation={2}>
@@ -104,7 +108,7 @@ const ProductModel = ({ product }) => {
           <Grid item xs={12}>
             <Carousel responsive={responsive} partialVisible={true}>
               {loading
-                ? Array.from({ length: isPhone ? 3 : 4 }).map((_, index) => <ProductDetailSkeleton key={index} />)
+                ? Array.from({ length: 5 }).map((_, index) => <ProductDetailSkeleton key={index} />)
                 : listProducts.map((item, index) => <ProductDetailCard key={index} product={item}></ProductDetailCard>)}
             </Carousel>
           </Grid>

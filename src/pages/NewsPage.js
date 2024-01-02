@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import NewsCard from '~/components/News/NewsCard';
 import ProductCard from '~/components/Products/ProductCard';
 import * as SagaActionTypes from '~/redux/constants';
+import { Helmet } from 'react-helmet';
 
 const NewsPage = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,9 @@ const NewsPage = () => {
         width: '100%',
       }}
     >
+      <Helmet>
+        <title>News | Lapteller</title>
+      </Helmet>
       <Box
         sx={{
           display: 'flex',
@@ -40,20 +44,18 @@ const NewsPage = () => {
           padding: '10px',
         }}
       >
-        {loading ? (
-          <CircularProgress />
-        ) : (
-          listNews.map((item, index) => (
-            <NewsCard
-              key={index}
-              title={item.title}
-              description={item.description}
-              url={item.url}
-              urlToImage={item.urlToImage}
-              publishedAt={item.publishedAt}
-            ></NewsCard>
-          ))
-        )}
+        {loading
+          ? Array.from({ length: 10 }).map((_, index) => <NewsCard key={index} loading={true} />)
+          : listNews.map((item, index) => (
+              <NewsCard
+                key={index}
+                title={item.title}
+                description={item.description}
+                url={item.url}
+                urlToImage={item.urlToImage}
+                publishedAt={item.publishedAt}
+              ></NewsCard>
+            ))}
       </Box>
     </div>
   );

@@ -7,6 +7,7 @@ import { modalActions } from '~/redux/reducer/ModalReducer';
 import * as SagaActionTypes from '~/redux/constants';
 import ModalCustom from '~/HOC/ModalCustom';
 import ProductModel from '~/components/Products/ProductModel';
+import { Helmet } from 'react-helmet';
 
 const ChatBotPage = () => {
   const dispatch = useDispatch();
@@ -51,6 +52,9 @@ const ChatBotPage = () => {
         width: '100%',
       }}
     >
+      <Helmet>
+        <title>Chatbot | Lapteller</title>
+      </Helmet>
       <Paper
         sx={{
           display: 'flex',

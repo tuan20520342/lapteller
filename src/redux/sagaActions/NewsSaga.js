@@ -8,9 +8,9 @@ function* actGetNews(action) {
     const { keyword, callback } = action;
     const res = yield call(() => NewsService.getNews(keyword ?? 'laptop'));
     const { status, data } = res;
-    console.log(res);
     if (status === 200) {
-      yield put(newsActions.getNewsSuccess({ listNews: data.articles }));
+      const slicedData = data.articles.slice(0, 30);
+      yield put(newsActions.getNewsSuccess({ listNews: slicedData }));
       callback();
     } else {
       callback();
