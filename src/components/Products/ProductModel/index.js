@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductCard from '../ProductCard';
 import * as SagaActionTypes from '~/redux/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Grid, Tooltip, Typography } from '@mui/material';
+import { Box, Grid, Skeleton, Tooltip, Typography } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import { ellipsisStyle } from '~/components/UI/EllipsisStyle';
@@ -10,6 +10,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import ProductDetailCard from '../ProductDetailCard';
 import useResponsive from '~/hooks/useResponsive';
+import ProductDetailSkeleton from '../ProductDetailSkeleton';
 
 const responsive = {
   desktop: {
@@ -34,22 +35,17 @@ const ProductModel = ({ product }) => {
   const dispatch = useDispatch();
   const { listProducts } = useSelector((state) => state.productSlice);
 
+  const [loading, setLoading] = useState(true);
+
   const isPhone = useResponsive('down', 'sm');
 
   useEffect(() => {
     dispatch({
       type: SagaActionTypes.GET_PRODUCTS_SAGA,
       productName: name,
+      callback: () => setLoading(false),
     });
   }, [dispatch]);
-
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#cecece',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
 
   return (
     <div
@@ -85,26 +81,31 @@ const ProductModel = ({ product }) => {
             <Typography sx={ellipsisStyle}>{`Storage: ${storage}`}</Typography>
           </Grid>
           <Grid item xs={12} md={7} sx={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
-            {listProducts.slice(0, isPhone ? 3 : 4).map((item, index) => (
-              <Paper style={{ flex: '1' }} key={index} elevation={2}>
-                <img
-                  src={item.thumbnail}
-                  alt={item.title}
-                  style={{
-                    width: '100%',
-                    aspectRatio: '1/1',
-                    borderRadius: '10px',
-                    objectFit: 'cover',
-                  }}
-                />
-              </Paper>
-            ))}
+            {loading
+              ? Array.from({ length: isPhone ? 3 : 4 }).map((_, index) => (
+                  <Skeleton key={index} variant="rectangular" sx={{ flex: '1', aspectRatio: '1/1', height: '100%' }} />
+                ))
+              : listProducts.slice(0, isPhone ? 3 : 4).map((item, index) => (
+                  <Paper style={{ flex: '1', display: 'flex', justifyContent: 'center' }} key={index} elevation={2}>
+                    <img
+                      src={item.thumbnail}
+                      alt={item.title}
+                      style={{
+                        width: '100%',
+                        aspectRatio: '1/1',
+                        borderRadius: '10px',
+                        objectFit: 'cover',
+                        maxWidth: '205px',
+                      }}
+                    />
+                  </Paper>
+                ))}
           </Grid>
           <Grid item xs={12}>
             <Carousel responsive={responsive} partialVisible={true}>
-              {listProducts.map((item, index) => (
-                <ProductDetailCard product={item}></ProductDetailCard>
-              ))}
+              {loading
+                ? Array.from({ length: isPhone ? 3 : 4 }).map((_, index) => <ProductDetailSkeleton key={index} />)
+                : listProducts.map((item, index) => <ProductDetailCard key={index} product={item}></ProductDetailCard>)}
             </Carousel>
           </Grid>
         </Grid>

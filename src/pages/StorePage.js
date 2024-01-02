@@ -1,4 +1,4 @@
-import { Button, IconButton, Stack, Typography } from '@mui/material';
+import { Button, IconButton, Skeleton, Stack, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, Tooltip, useMap, useMapEvents } from 'react-leaflet';
 import { useDispatch, useSelector } from 'react-redux';
@@ -70,21 +70,23 @@ const StorePage = () => {
         width: '100%',
       }}
     >
-      {!state?.storeName
-        ? '404'
-        : !loading && (
-            <MapContainer center={position} zoom={13}>
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              {listStores.map((item) => (
-                <CustomMarker key={item.place_id} store={item} />
-              ))}
-              <LocationMarker />
-              <MyLocationButton />
-            </MapContainer>
-          )}
+      {!state?.storeName ? (
+        '404'
+      ) : loading ? (
+        <Skeleton variant="rectangular" height={'100%'} width={'100%'} animation="wave" />
+      ) : (
+        <MapContainer center={position} zoom={13}>
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          {listStores.map((item) => (
+            <CustomMarker key={item.place_id} store={item} />
+          ))}
+          <LocationMarker />
+          <MyLocationButton />
+        </MapContainer>
+      )}
     </div>
   );
 };

@@ -5,13 +5,14 @@ import { ProductService } from '~/services/api/ProductAPI';
 
 function* actGetProducts(action) {
   try {
-    const { productName } = action;
+    const { productName, callback } = action;
     const res = yield call(() => ProductService.getProducts(productName ?? 'Iphone15'));
     const { status, data } = res;
     console.log(res);
     if (status === 200) {
       const slicedData = data.slice(0, 10);
       yield put(productActions.getProductsSuccess({ listProducts: slicedData }));
+      callback();
     } else {
     }
   } catch (err) {
