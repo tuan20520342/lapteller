@@ -27,7 +27,7 @@ const ProductCard = ({ product, onClick }) => {
 
           <Typography sx={ellipsisStyle}>{`Screen size: ${screenSize}`}</Typography>
           <Tooltip title={processor}>
-            <Typography sx={ellipsisStyle}>{`Processor: ${processor}`}</Typography>
+            <Typography sx={ellipsisStyle}>{`CPU: ${processor}`}</Typography>
           </Tooltip>
           <Typography sx={ellipsisStyle}>{`Memory: ${memory}`}</Typography>
 

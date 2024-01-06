@@ -11,23 +11,6 @@ import useResponsive from '~/hooks/useResponsive';
 import ProductDetailSkeleton from '../ProductDetailSkeleton';
 import NotFoundImg from '~/components/UI/NotFound';
 
-const responsive = {
-  desktop: {
-    breakpoint: { max: 3000, min: 1200 },
-    items: 3,
-    partialVisibilityGutter: 40,
-  },
-  tablet: {
-    breakpoint: { max: 1200, min: 600 },
-    items: 2,
-  },
-  mobile: {
-    breakpoint: { max: 600, min: 0 },
-    items: 1,
-    slidesToSlide: 1, // optional, default to 1.
-  },
-};
-
 const ProductModel = ({ product }) => {
   const { name, screenSize, processor, memory, storage } = product;
 
@@ -38,6 +21,23 @@ const ProductModel = ({ product }) => {
   const [error, setError] = useState(false);
 
   const isPhone = useResponsive('down', 'sm');
+
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1200 },
+      items: 3,
+      partialVisibilityGutter: listProducts?.length === 3 ? 0 : 40,
+    },
+    tablet: {
+      breakpoint: { max: 1200, min: 600 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 600, min: 0 },
+      items: 1,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+  };
 
   useEffect(() => {
     dispatch({
@@ -79,7 +79,7 @@ const ProductModel = ({ product }) => {
             <Grid item xs={12} md={5}>
               <Typography sx={ellipsisStyle}>{`Screen size: ${screenSize}`}</Typography>
               <Tooltip title={processor}>
-                <Typography sx={ellipsisStyle}>{`Processor: ${processor}`}</Typography>
+                <Typography sx={ellipsisStyle}>{`CPU: ${processor}`}</Typography>
               </Tooltip>
               <Typography sx={ellipsisStyle}>{`Memory: ${memory}`}</Typography>
               <Typography sx={ellipsisStyle}>{`Storage: ${storage}`}</Typography>

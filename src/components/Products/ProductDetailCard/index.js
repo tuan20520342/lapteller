@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardContent, Typography, Paper, Divider, Button, CardActions, Grid, Rating } from '@mui/material';
+import { CardContent, Typography, Paper, Divider, Button, CardActions, Grid, Rating, Stack } from '@mui/material';
 import { ellipsisStyle } from '~/components/UI/EllipsisStyle';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import { printNumberWithCommas } from '~/utils/printNumerWithCommas';
@@ -10,6 +10,14 @@ const ProductDetailCard = ({ product }) => {
 
   const handleGoToShop = () => {
     navigate('/store', { state: { storeName: product?.source } });
+  };
+
+  const productCondition = (condition) => {
+    if (condition === 'đã qua sử dụng') {
+      return <span style={{ color: 'orange' }}>used</span>;
+    } else {
+      return <span style={{ color: 'green' }}>new</span>;
+    }
   };
 
   return (
@@ -28,9 +36,13 @@ const ProductDetailCard = ({ product }) => {
           {`${printNumberWithCommas(product.extracted_price)} VNĐ`}
         </Typography>
         <Divider variant="middle" sx={{ marginBottom: '8px' }} />
-        <Rating name="half-rating-read" defaultValue={product.rating} precision={0.5} readOnly />
         <Typography sx={ellipsisStyle}>{`Store: ${product.source}`}</Typography>
-        <Typography sx={ellipsisStyle}>{`Condition: ${product.second_hand_condition}`}</Typography>
+        <Typography sx={ellipsisStyle}>Condition: {productCondition(product.second_hand_condition)}</Typography>
+
+        <Stack direction="row" spacing={1}>
+          <Rating name="half-rating-read" defaultValue={product.rating} precision={0.5} readOnly />
+          <Typography>{`(${product.rating})`}</Typography>
+        </Stack>
         <Typography sx={ellipsisStyle}>{`Review: ${product.reviews}`}</Typography>
         <CardActions>
           <Grid container spacing={1}>
