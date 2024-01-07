@@ -13,10 +13,10 @@ const ProductDetailCard = ({ product }) => {
   };
 
   const productCondition = (condition) => {
-    if (condition === 'đã qua sử dụng') {
-      return <span style={{ color: 'orange' }}>used</span>;
+    if (!condition) {
+      return <span style={{ color: 'orange', fontWeight: 'bold', textTransform: 'uppercase' }}> used</span>;
     } else {
-      return <span style={{ color: 'green' }}>new</span>;
+      return <span style={{ color: 'green', fontWeight: 'bold', textTransform: 'uppercase' }}> new</span>;
     }
   };
 
@@ -33,11 +33,11 @@ const ProductDetailCard = ({ product }) => {
             ...ellipsisStyle,
           }}
         >
-          {`${printNumberWithCommas(product.extracted_price)} VNĐ`}
+          {`${printNumberWithCommas(product.price)} VNĐ`}
         </Typography>
         <Divider variant="middle" sx={{ marginBottom: '8px' }} />
         <Typography sx={ellipsisStyle}>{`Store: ${product.source}`}</Typography>
-        <Typography sx={ellipsisStyle}>Condition: {productCondition(product.second_hand_condition)}</Typography>
+        <Typography sx={ellipsisStyle}>Condition: {productCondition(product.isNew)}</Typography>
 
         <Stack direction="row" spacing={1}>
           <Rating name="half-rating-read" defaultValue={product.rating} precision={0.5} readOnly />
@@ -54,7 +54,7 @@ const ProductDetailCard = ({ product }) => {
                 href={product.link === '#' ? product.product_link : product.link}
                 target="_blank"
               >
-                Product detail
+                Buy Now
               </Button>
             </Grid>
             <Grid item xs={12}>

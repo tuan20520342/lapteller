@@ -11,9 +11,9 @@ const CustomMarker = ({ store }) => {
 
   const storeStatus = (status) => {
     if (status?.includes('Đang mở cửa')) {
-      return <span style={{ color: 'green' }}> open</span>;
+      return <span style={{ color: 'green', fontWeight: 'bold', textTransform: 'uppercase' }}> open</span>;
     } else {
-      return <span style={{ color: 'red' }}> closed</span>;
+      return <span style={{ color: 'red', fontWeight: 'bold', textTransform: 'uppercase' }}> closed</span>;
     }
   };
 
@@ -21,7 +21,7 @@ const CustomMarker = ({ store }) => {
     <Marker position={[latitude, longitude]}>
       <Popup>
         {store?.phone && (
-          <Typography>
+          <Typography component="a" href={`tel:${store?.phone}`} sx={{ textDecoration: 'none' }}>
             <LocalPhoneIcon fontSize="small" sx={{ transform: 'translate(0, 20%)' }} />
             {` ${store?.phone}`}
           </Typography>
