@@ -4,6 +4,7 @@ export const DOMAIN_NAME = 'http://localhost:5000';
 
 //CHATBOT
 export const URL_CHATBOT = `${DOMAIN_NAME}/ask`;
+export const URL_IMG_CHAT = `${DOMAIN_NAME}/askImg`;
 
 //VIDEO
 export const URL_GET_VIDEO = (keyword) =>

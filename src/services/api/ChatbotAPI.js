@@ -8,4 +8,11 @@ export const ChatbotService = {
     };
     return axios.post(UrlApi.URL_CHATBOT, data);
   },
+  postImgMessage: (question, imageUrl) => {
+    const data = {
+      question: question,
+      imageUrl: imageUrl,
+    };
+    return axios.post(UrlApi.URL_IMG_CHAT, data);
+  },
 };

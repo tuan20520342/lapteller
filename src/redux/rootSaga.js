@@ -9,6 +9,7 @@ export default function* rootSaga() {
   yield all([
     //Chatbot
     ChatbotSaga.followActSendMessage(),
+    ChatbotSaga.followActSendImgQuestion(),
     //Video
     VideoSaga.followActGetVideo(),
     //News

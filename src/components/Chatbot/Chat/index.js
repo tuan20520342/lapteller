@@ -36,7 +36,7 @@ const Chat = ({ isAnswer, content, onClick, loading }) => {
         ) : (
           <MarkdownView
             className="markdown"
-            markdown={isAnswer ? content.answer : content}
+            markdown={isAnswer ? content.answer : content.message}
             options={{ tables: true, emoji: true }}
           />
         )}
@@ -46,6 +46,19 @@ const Chat = ({ isAnswer, content, onClick, loading }) => {
               <ProductCard key={index} product={item} onClick={onClick}></ProductCard>
             ))}
           </Stack>
+        )}
+        {content?.imageUrl && !isAnswer && (
+          <img
+            src={content?.imageUrl}
+            alt=""
+            style={{
+              width: '120px',
+              height: '120px',
+              borderRadius: '8px',
+              objectFit: 'cover',
+              marginLeft: 'auto',
+            }}
+          />
         )}
       </Paper>
     </Paper>

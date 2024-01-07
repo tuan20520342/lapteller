@@ -1,4 +1,4 @@
-import { Box, IconButton, InputAdornment, Paper, TextField } from '@mui/material';
+import { Box, FormControlLabel, IconButton, InputAdornment, Paper, Switch, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import Chat from '~/components/Chatbot/Chat';
 import SendIcon from '@mui/icons-material/Send';
@@ -13,22 +13,42 @@ const ChatBotPage = () => {
   const dispatch = useDispatch();
   const { listChat } = useSelector((state) => state.chatbotSlice);
   const [loading, setLoading] = useState(false);
+  const [imageSearch, setImageSearch] = useState(false);
   const [newMessage, setNewMessage] = useState('');
+  const [urlImage, setUrlImage] = useState('');
 
   useEffect(() => {
     // Scroll the entire page to the bottom when a new message is added
     window.scrollTo(0, document.body.scrollHeight);
   }, [listChat]);
 
+  const toggleimageSearch = () => {
+    setImageSearch((prev) => !prev);
+  };
+
   const handleSendMessage = () => {
-    if (newMessage.trim() !== '') {
-      dispatch({
-        type: SagaActionTypes.SEND_MESSAGE_SAGA,
-        message: newMessage,
-        onLoading: () => setLoading(true),
-        onFinish: () => setLoading(false),
-      });
-      setNewMessage('');
+    if (imageSearch) {
+      if (newMessage.trim() !== '' && urlImage.trim() !== '') {
+        dispatch({
+          type: SagaActionTypes.SEND_IMG_MESSAGE_SAGA,
+          message: newMessage,
+          imageUrl: urlImage,
+          onLoading: () => setLoading(true),
+          onFinish: () => setLoading(false),
+        });
+        setNewMessage('');
+        setUrlImage('');
+      }
+    } else {
+      if (newMessage.trim() !== '') {
+        dispatch({
+          type: SagaActionTypes.SEND_MESSAGE_SAGA,
+          message: newMessage,
+          onLoading: () => setLoading(true),
+          onFinish: () => setLoading(false),
+        });
+        setNewMessage('');
+      }
     }
   };
 
@@ -66,7 +86,7 @@ const ChatBotPage = () => {
           width: '100%',
           maxWidth: '1020px',
           minWidth: '200px',
-          marginBottom: '100px',
+          marginBottom: !imageSearch ? '120px' : '190px',
           backgroundColor: 'white',
           marginLeft: 'auto',
           marginRight: 'auto',
@@ -93,11 +113,31 @@ const ChatBotPage = () => {
           position: 'fixed',
           bottom: 0,
           left: 0,
-          padding: 2,
+          padding: '8px 8px 16px 8px',
           justifyContent: 'center',
         }}
       >
         <Box sx={{ width: '90%', maxWidth: 1000, minWidth: 200, position: 'relative' }}>
+          <FormControlLabel
+            value="top"
+            control={<Switch color="primary" checked={imageSearch} onChange={toggleimageSearch} />}
+            label="Image Search"
+          />
+          {imageSearch && (
+            <TextField
+              sx={{ marginBottom: 1 }}
+              inputProps={{ style: { fontWeight: 500 }, autoComplete: 'off' }}
+              variant="outlined"
+              placeholder="URL image"
+              fullWidth
+              color="secondary"
+              value={urlImage}
+              onChange={(e) => setUrlImage(e.target.value)}
+              onKeyDown={(key) => {
+                handleEnterMesage(key);
+              }}
+            />
+          )}
           <TextField
             inputProps={{ style: { fontWeight: 500 }, autoComplete: 'off' }}
             variant="outlined"
