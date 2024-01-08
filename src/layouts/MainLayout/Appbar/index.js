@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import AdbIcon from '@mui/icons-material/Adb';
@@ -29,8 +28,6 @@ const ResponsiveAppBar = ({ onOpenSidebar }) => {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -40,6 +37,7 @@ const ResponsiveAppBar = ({ onOpenSidebar }) => {
               color: 'inherit',
               textDecoration: 'none',
               textTransform: 'uppercase',
+              userSelect: 'none',
             }}
           >
             Lapteller
@@ -60,8 +58,6 @@ const ResponsiveAppBar = ({ onOpenSidebar }) => {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -72,6 +68,7 @@ const ResponsiveAppBar = ({ onOpenSidebar }) => {
               color: 'inherit',
               textDecoration: 'none',
               textTransform: 'uppercase',
+              userSelect: 'none',
             }}
           >
             Lapteller

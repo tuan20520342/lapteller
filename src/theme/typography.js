@@ -20,9 +20,9 @@ const FONT_PRIMARY = 'Arial, Helvetica, sans-serif';
 
 const typography = {
   fontFamily: FONT_PRIMARY,
-  fontWeightRegular: 700,
-  fontWeightMedium: 800,
-  fontWeightBold: 900,
+  fontWeightRegular: 400,
+  fontWeightMedium: 600,
+  fontWeightBold: 700,
   h1: {
     fontWeight: 800,
     lineHeight: 80 / 64,
@@ -56,7 +56,7 @@ const typography = {
   h6: {
     fontWeight: 800,
     lineHeight: 28 / 18,
-    fontSize: pxToRem(17),
+    fontSize: pxToRem(16),
     ...responsiveFontSizes({ sm: 18, md: 18, lg: 18 }),
   },
   subtitle1: {

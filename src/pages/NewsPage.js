@@ -1,24 +1,68 @@
-import React from 'react';
+import { Box } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import NewsCard from '~/components/News/NewsCard';
+import * as SagaActionTypes from '~/redux/constants';
+import { Helmet } from 'react-helmet';
+import NotFoundImg from '~/components/UI/NotFound';
 
 const NewsPage = () => {
+  const dispatch = useDispatch();
+  const { listNews } = useSelector((state) => state.newsSlice);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    dispatch({
+      type: SagaActionTypes.GET_NEWS_SAGA,
+      callback: () => setLoading(false),
+      fail: () => setError(true),
+    });
+  }, [dispatch]);
+
   return (
-    <div>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin viverra magna quis urna sollicitudin pharetra at
-      vel enim. Nulla malesuada congue leo, nec rutrum erat mollis vitae. Vivamus a porta sapien. Vivamus leo sapien,
-      hendrerit quis finibus non, porttitor condimentum mi. Cras sollicitudin nulla eu felis dignissim pulvinar. Donec
-      consequat luctus neque, ut lobortis libero lobortis a. Nunc ultricies tempus dui vel tincidunt. Donec blandit
-      metus ac mi gravida ultrices. Nulla pulvinar lorem id mi sagittis, quis commodo arcu faucibus. Nunc dictum libero
-      sit amet vehicula mollis. Cras et justo volutpat, bibendum risus vitae, pulvinar magna. Aliquam fringilla sapien
-      in risus lobortis maximus. Integer tempus odio nec urna viverra hendrerit. Aenean suscipit erat sem, at accumsan
-      mi aliquam a. Vivamus dapibus nibh tristique feugiat hendrerit. Duis elementum, dolor vitae ullamcorper dapibus,
-      mauris ipsum tristique neque, vel pharetra diam diam fermentum massa. Ut ullamcorper fringilla felis nec
-      tristique. Nulla vel hendrerit sapien. Nunc porttitor, quam vel porttitor scelerisque, augue orci faucibus tellus,
-      non ultrices nunc mauris ac lorem. Ut quis sapien odio. In dictum velit mauris. Nullam feugiat tortor est, eu
-      facilisis nisl rhoncus eget. Proin imperdiet sapien eu sollicitudin aliquet. Aliquam pharetra tincidunt sapien,
-      eget sollicitudin ante egestas id. Aliquam dapibus nisi in rhoncus imperdiet. Fusce porttitor id erat in aliquet.
-      Morbi blandit ipsum nec elit faucibus aliquet. Proin vestibulum cursus sem ac mollis. Etiam ornare feugiat mauris,
-      at placerat nisi mattis non. Maecenas commodo, sem vel consequat tincidunt, orci velit vulputate orci, sed
-      tincidunt nibh elit vel tortor. Nulla volutpat quam sed tempus convallis. Vestibulum egestas suscipit lacus sit
+    <div
+      style={{
+        height: '100%',
+        width: '100%',
+      }}
+    >
+      <Helmet>
+        <title>News | Lapteller</title>
+      </Helmet>
+      {error ? (
+        <NotFoundImg isWrong={true} />
+      ) : (
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: loading ? 'center' : 'start',
+            flexDirection: 'column',
+            gap: '10px',
+            height: '100%',
+            width: '100%',
+            maxWidth: '1000px',
+            minWidth: '200px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            padding: '10px',
+          }}
+        >
+          {loading
+            ? Array.from({ length: 10 }).map((_, index) => <NewsCard key={index} loading={true} />)
+            : listNews.map((item, index) => (
+                <NewsCard
+                  key={index}
+                  title={item.title}
+                  description={item.description}
+                  url={item.url}
+                  urlToImage={item.urlToImage}
+                  publishedAt={item.publishedAt}
+                ></NewsCard>
+              ))}
+        </Box>
+      )}
     </div>
   );
 };

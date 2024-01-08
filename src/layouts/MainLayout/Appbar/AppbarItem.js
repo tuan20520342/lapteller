@@ -1,5 +1,5 @@
 import { NavLink as RouterLink } from 'react-router-dom';
-import { alpha, styled, useTheme } from '@mui/material/styles';
+import { alpha, useTheme } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 
 const AppBarItem = ({ item, active }) => {
