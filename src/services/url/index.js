@@ -1,6 +1,6 @@
 import { keyboard } from '@testing-library/user-event/dist/keyboard';
 
-export const DOMAIN_NAME = 'http://localhost:5000';
+export const DOMAIN_NAME = 'https://lapteller.onrender.com';
 
 //CHATBOT
 export const URL_CHATBOT = `${DOMAIN_NAME}/ask`;
