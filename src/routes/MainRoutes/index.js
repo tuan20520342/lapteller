@@ -3,11 +3,11 @@ import CommonRoutes from './CommonRoutes';
 
 const MainRoutes = () => {
   return {
-    path: '/lapteller/*', // Updated base path
+    path: '/lapteller/',
     element: <MainLayout />,
     children: CommonRoutes.map((route) => ({
       ...route,
-      path: route.path ? `${route.path}` : '', // Use relative paths
+      path: route.path ? `${route.path}` : '',
     })),
   };
 };
