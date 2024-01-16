@@ -6,19 +6,19 @@ import StorePage from '~/pages/StorePage';
 
 const CommonRoutes = [
   {
-    path: '/',
-    element: <NewsPage />,
-  },
-  {
-    path: '/videos',
-    element: <VideoPage />,
-  },
-  {
-    path: '/chatbot',
+    path: '',
     element: <ChatBotPage />,
   },
   {
-    path: '/store',
+    path: 'news',
+    element: <NewsPage />,
+  },
+  {
+    path: 'videos',
+    element: <VideoPage />,
+  },
+  {
+    path: 'store',
     element: <StorePage />,
   },
   {

@@ -4,19 +4,19 @@ import SmartToyOutlinedIcon from '@mui/icons-material/SmartToyOutlined';
 
 const navConfig = [
   {
+    title: 'Chatbot',
+    path: '/lapteller/',
+    icon: <SmartToyOutlinedIcon />,
+  },
+  {
     title: 'News',
-    path: '/',
+    path: '/lapteller/news',
     icon: <FeedOutlinedIcon />,
   },
   {
     title: 'Video',
-    path: '/videos',
+    path: '/lapteller/videos',
     icon: <OndemandVideoOutlinedIcon />,
-  },
-  {
-    title: 'Chatbot',
-    path: '/chatbot',
-    icon: <SmartToyOutlinedIcon />,
   },
 ];
 
