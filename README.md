@@ -35,40 +35,13 @@ Step 1. Install Node.js and npm (skip if you had it already):
 - [**Node.js**](https://nodejs.org/en/download/package-manager)
 - [**npm**](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-Step 2: Clone repository for backend.
-```console
-git clone https://github.com/phanxuanquang/LapTeller-Backend
-```
-
-Step 2: Clone sub-module for frontend.
-```console
-cd LapTeller-Backend
-```
-```console
-git submodule update --init --recursive
-```
-
-Step 3: Install Node.js modules for backend project.
+Step 2: Install Node.js modules for frontend project.
 ```console
 npm i
 ```
 
-Step 4: Install Node.js modules for frontend project.
-```console
-cd lapteller
-```
-```console
-npm i
-```
-### 2.2. Usage:
-##### 2.2.1. Start Node.js server:
-```console
-node LapTeller.js
-```
-##### 2.2.1. Start React application:
-```console
-cd lapteller
-```
+Step 2: Start React application.
 ```console
 npm start
 ```
+
