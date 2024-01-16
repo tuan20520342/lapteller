@@ -9,7 +9,7 @@ function* actGetNews(action) {
     const res = yield call(() => NewsService.getNews(keyword ?? 'laptop'));
     const { status, data } = res;
     if (status === 200) {
-      const slicedData = data.articles.slice(0, 30);
+      const slicedData = data.slice(0, 30);
       yield put(newsActions.getNewsSuccess({ listNews: slicedData }));
     } else {
       fail();
