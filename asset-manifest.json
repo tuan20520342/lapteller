@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/LapTeller/static/css/main.2671135c.css",
-    "main.js": "/LapTeller/static/js/main.a889e59c.js",
-    "static/js/787.b521c296.chunk.js": "/LapTeller/static/js/787.b521c296.chunk.js",
-    "static/media/404-not-found.png": "/LapTeller/static/media/404-not-found.19a01faaddcba524a829.png",
-    "static/media/oops.png": "/LapTeller/static/media/oops.bff8017f7a0118a630ca.png",
-    "static/media/marker_map.png": "/LapTeller/static/media/marker_map.1dd8fc0cff86f7c41313.png",
-    "static/media/no-image.png": "/LapTeller/static/media/no-image.0b491be1968160212a92.png",
-    "static/media/revicons.eot": "/LapTeller/static/media/revicons.a77de540a38981833f9e.eot",
-    "static/media/revicons.ttf": "/LapTeller/static/media/revicons.57fd05d4ae650374c8de.ttf",
-    "static/media/revicons.woff": "/LapTeller/static/media/revicons.e8746a624ed098489406.woff",
-    "index.html": "/LapTeller/index.html",
-    "main.2671135c.css.map": "/LapTeller/static/css/main.2671135c.css.map",
-    "main.a889e59c.js.map": "/LapTeller/static/js/main.a889e59c.js.map",
-    "787.b521c296.chunk.js.map": "/LapTeller/static/js/787.b521c296.chunk.js.map"
+    "main.css": "/lapteller/static/css/main.f1481cfc.css",
+    "main.js": "/lapteller/static/js/main.da5db339.js",
+    "static/js/787.b521c296.chunk.js": "/lapteller/static/js/787.b521c296.chunk.js",
+    "static/media/404-not-found.png": "/lapteller/static/media/404-not-found.19a01faaddcba524a829.png",
+    "static/media/oops.png": "/lapteller/static/media/oops.bff8017f7a0118a630ca.png",
+    "static/media/marker_map.png": "/lapteller/static/media/marker_map.1dd8fc0cff86f7c41313.png",
+    "static/media/no-image.png": "/lapteller/static/media/no-image.0b491be1968160212a92.png",
+    "static/media/revicons.eot": "/lapteller/static/media/revicons.a77de540a38981833f9e.eot",
+    "static/media/revicons.ttf": "/lapteller/static/media/revicons.57fd05d4ae650374c8de.ttf",
+    "static/media/revicons.woff": "/lapteller/static/media/revicons.e8746a624ed098489406.woff",
+    "index.html": "/lapteller/index.html",
+    "main.f1481cfc.css.map": "/lapteller/static/css/main.f1481cfc.css.map",
+    "main.da5db339.js.map": "/lapteller/static/js/main.da5db339.js.map",
+    "787.b521c296.chunk.js.map": "/lapteller/static/js/787.b521c296.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2671135c.css",
-    "static/js/main.a889e59c.js"
+    "static/css/main.f1481cfc.css",
+    "static/js/main.da5db339.js"
   ]
 }
