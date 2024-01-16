@@ -9,7 +9,7 @@ const ProductDetailCard = ({ product }) => {
   const navigate = useNavigate();
 
   const handleGoToShop = () => {
-    navigate('/store', { state: { storeName: product?.source } });
+    navigate('/lapteller/store', { state: { storeName: product?.source } });
   };
 
   const productCondition = (condition) => {
