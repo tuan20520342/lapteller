@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/lapteller/static/css/main.f1481cfc.css",
-    "main.js": "/lapteller/static/js/main.49ab3d42.js",
-    "static/js/787.b521c296.chunk.js": "/lapteller/static/js/787.b521c296.chunk.js",
+    "main.css": "/lapteller/static/css/main.3bc93e6f.css",
+    "main.js": "/lapteller/static/js/main.5022b1e8.js",
+    "static/js/496.0c2fd39d.chunk.js": "/lapteller/static/js/496.0c2fd39d.chunk.js",
     "static/media/404-not-found.png": "/lapteller/static/media/404-not-found.19a01faaddcba524a829.png",
     "static/media/oops.png": "/lapteller/static/media/oops.bff8017f7a0118a630ca.png",
     "static/media/marker_map.png": "/lapteller/static/media/marker_map.1dd8fc0cff86f7c41313.png",
@@ -11,12 +11,12 @@
     "static/media/revicons.ttf": "/lapteller/static/media/revicons.57fd05d4ae650374c8de.ttf",
     "static/media/revicons.woff": "/lapteller/static/media/revicons.e8746a624ed098489406.woff",
     "index.html": "/lapteller/index.html",
-    "main.f1481cfc.css.map": "/lapteller/static/css/main.f1481cfc.css.map",
-    "main.49ab3d42.js.map": "/lapteller/static/js/main.49ab3d42.js.map",
-    "787.b521c296.chunk.js.map": "/lapteller/static/js/787.b521c296.chunk.js.map"
+    "main.3bc93e6f.css.map": "/lapteller/static/css/main.3bc93e6f.css.map",
+    "main.5022b1e8.js.map": "/lapteller/static/js/main.5022b1e8.js.map",
+    "496.0c2fd39d.chunk.js.map": "/lapteller/static/js/496.0c2fd39d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f1481cfc.css",
-    "static/js/main.49ab3d42.js"
+    "static/css/main.3bc93e6f.css",
+    "static/js/main.5022b1e8.js"
   ]
 }
