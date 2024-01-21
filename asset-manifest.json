@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/lapteller/static/css/main.3bc93e6f.css",
-    "main.js": "/lapteller/static/js/main.5022b1e8.js",
+    "main.js": "/lapteller/static/js/main.542917a1.js",
     "static/js/496.0c2fd39d.chunk.js": "/lapteller/static/js/496.0c2fd39d.chunk.js",
     "static/media/404-not-found.png": "/lapteller/static/media/404-not-found.19a01faaddcba524a829.png",
     "static/media/oops.png": "/lapteller/static/media/oops.bff8017f7a0118a630ca.png",
@@ -12,11 +12,11 @@
     "static/media/revicons.woff": "/lapteller/static/media/revicons.e8746a624ed098489406.woff",
     "index.html": "/lapteller/index.html",
     "main.3bc93e6f.css.map": "/lapteller/static/css/main.3bc93e6f.css.map",
-    "main.5022b1e8.js.map": "/lapteller/static/js/main.5022b1e8.js.map",
+    "main.542917a1.js.map": "/lapteller/static/js/main.542917a1.js.map",
     "496.0c2fd39d.chunk.js.map": "/lapteller/static/js/496.0c2fd39d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3bc93e6f.css",
-    "static/js/main.5022b1e8.js"
+    "static/js/main.542917a1.js"
   ]
 }
